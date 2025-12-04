@@ -1,12 +1,20 @@
 import express from 'express';
+import cors from 'cors'
+import { env } from './env.ts';
+import { userRoutes } from './routes/userRoutes.ts'
 
 const app = express();
-const PORT = process.env.PORT || 3333;
+const PORT = env.PORT || 3333;
 
-app.get('/', (req, res) => {
-  res.send('Hello, World!');
-});
+app.use(cors());
+app.use(express.json());
 
-app.listen(PORT, () => {
+app.use('/users', userRoutes);
+app.get('/health', (req, res) => res.send("OK"));
+
+app.listen({
+  hots: '0.0.0.0',
+  port: PORT
+}, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });

@@ -3,7 +3,7 @@ VALUES (
   '8dfceb80-199c-488f-8918-a0609175399c',
   'Administrador',
   'administrador@admin.com',
-  'hashed-password',
+  '$2b$10$049vvxbTsOW3IiqoEVUKM.4.au3WCHO5I24MxCZw3GzBwadPHf8WO',
   'admin'
 ) ON CONFLICT (id) DO NOTHING;
 
@@ -16,9 +16,9 @@ INSERT INTO services (id, title, price) VALUES
   ON CONFLICT (id) DO NOTHING;
 
 INSERT INTO users (id, name, email, password_hash, role, picture) VALUES
-  ('b9f0f153-4bc2-4576-9a8f-7b78762b2b37', 'Técnico 1', 'tecnico1@tech.com', 'hashed-password', 'tech', 'foto1.jpg'),
-  ('8717d531-97de-43f5-a1dd-e1bdcc20140d', 'Técnico 2', 'tecnico2@tech.com', 'hashed-password', 'tech', 'foto2.jpg'),
-  ('a290e17b-d0a3-4b36-b3dd-75a3e810be7b', 'Técnico 3', 'tecnico3@tech.com', 'hashed-password', 'tech', 'foto3.jpg')
+  ('b9f0f153-4bc2-4576-9a8f-7b78762b2b37', 'Técnico 1', 'tecnico1@tech.com', '$2b$10$m.C.STCN2JBQIFJH/XOxaetUw.2.cAGnB9rnS6PHsTdBUpWtty9Ke', 'tech', 'foto1.jpg'),
+  ('8717d531-97de-43f5-a1dd-e1bdcc20140d', 'Técnico 2', 'tecnico2@tech.com', '$2b$10$Ae8yqNB7DDJUpoeyNdK67ekBFtdsDUF7PBWVJEvv/fiRrpwm5tU7m', 'tech', 'foto2.jpg'),
+  ('a290e17b-d0a3-4b36-b3dd-75a3e810be7b', 'Técnico 3', 'tecnico3@tech.com', '$2b$10$NsnNWhGVUzApTi/vGEwTWOLaT0phxHmh.WUbkYXnVn.MZL9dF4YOm', 'tech', 'foto3.jpg')
   ON CONFLICT (id) DO NOTHING;
 
 INSERT INTO technician_availability (id, user_id, time) VALUES

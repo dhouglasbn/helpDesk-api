@@ -1,9 +1,47 @@
 import { Router } from 'express'
 import UserController from '../controllers/userController.ts';
+import { authMiddleware } from '../middlewares/authMiddleware.ts';
+import { validateZodSchema } from '../middlewares/validateDataMiddleware.ts';
+import { z } from 'zod';
+import multer from 'multer';
 
 const router = Router();
 const userController = new UserController();
+const upload = multer({ storage: multer.memoryStorage() });
 
+// login
 router.post("/login", userController.login);
+
+// CRUD tech accounts
+router.post("/tech", authMiddleware, validateZodSchema(z.object({
+    name: z.string().min(3),
+    email: z.email(),
+    password: z.string().min(6)
+  })), userController.createTechAccount);
+router.get("/techList", authMiddleware, userController.listTechAccounts);
+router.put("/tech/:id", authMiddleware, validateZodSchema(
+  z.object({
+    newName: z.string().min(3),
+    newEmail: z.email(),
+    newPassword: z.string().min(6)
+  }),
+  z.object({
+    id: z.uuid()
+  })
+), userController.updateTechAccount);
+router.put("/techAvailabilities/:id", authMiddleware, validateZodSchema(
+  z.object({
+    newAvailabilities: z.string().regex(/^([01]\d|2[0-3]):([0-5]\d)$/, {
+      message: "Horário inválido. Use o formato HH:MM (00–23 / 00–59)."
+    }).array().min(1)
+  }), 
+  z.object({
+    id: z.uuid()
+  })
+), userController.updateTechAvailabilities);
+
+// GET e UPLOAD da foto de usuário
+router.put("/picture/:id", authMiddleware, upload.single('profilePic'), userController.updateUserPicture);
+router.get("/picture/:id", userController.getUserPicture);
 
 export { router as userRoutes };

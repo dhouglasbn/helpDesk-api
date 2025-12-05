@@ -1,0 +1,73 @@
+# Variables
+@baseUrl = http://localhost:3333
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhkZmNlYjgwLTE5OWMtNDg4Zi04OTE4LWEwNjA5MTc1Mzk5YyIsImVtYWlsIjoiYWRtaW5pc3RyYWRvckBhZG1pbi5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NjQ5NjQ1MTAsImV4cCI6MTc2NDk2ODExMH0.zZp6C7E9e634gSHZydGQAzEekEYmuhBXIo8rc9Rk120
+
+###
+
+# create Tech Account
+# @name createTechAccount
+POST {{baseUrl}}/users/tech
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "Tech test 3",
+  "email": "techtest3@tech.com",
+  "password": "tempPassword"
+}
+
+###
+
+# list Tech Accounts
+# @name listTechAccounts
+GET {{baseUrl}}/users/techList
+Authorization: Bearer {{token}}
+
+###
+
+# update Tech Account
+# @name updateTechAccount
+PUT {{baseUrl}}/users/tech/a290e17b-d0a3-4b36-b3dd-75a3e810be7b
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer {{token}}
+
+{
+  "newName": "Tech test 99",
+  "newEmail": "test3@tech.com",
+  "newPassword": "tempPassword"
+}
+
+###
+
+# update Tech Availabilities
+# @name updateTechAvailabilities
+PUT {{baseUrl}}/users/techAvailabilities/546cf051-6e3f-46ba-8660-167c7cf33f44
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer {{token}}
+
+{
+  "newAvailabilities": ["08:00", "09:00", "10:00"]
+}
+
+###
+# update User Picture
+# @name updateUserPicture
+PUT {{baseUrl}}/users/picture/b9f0f153-4bc2-4576-9a8f-7b78762b2b37
+Authorization: Bearer {{token}}
+Content-Type: multipart/form-data; boundary=----BOUNDARY
+
+------BOUNDARY
+Content-Disposition: form-data; name="profilePic"; filename="perfil.jpeg"
+Content-Type: image/jpeg
+
+< ../public/perfil.jpeg
+------BOUNDARY--
+
+###
+# get User Picture
+# @name getUserPicture
+GET {{baseUrl}}/users/picture/b9f0f153-4bc2-4576-9a8f-7b78762b2b37
+Authorization: Bearer {{token}}

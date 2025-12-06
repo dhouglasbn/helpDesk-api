@@ -1,18 +1,19 @@
+// biome-ignore assist/source/organizeImports: <i dont care>
 import { db } from "../db/connection.ts"
 import { schema } from "../db/schema/index.ts"
 import { eq } from "drizzle-orm"
 
 export default class ServiceService {
 	// Métodos do serviço de autenticação podem ser adicionados aqui
-	createService = async (title: string, price: number) => {
-		return await db
+	createService = async (title: string, price: number) =>
+		await db
 			.insert(schema.services)
 			.values({
 				title,
 				price: String(price),
 			})
 			.returning()
-	}
+
 
 	updateService = async (serviceId: string, title: string, price: number) => {
 		const serviceExists = await db.query.services.findFirst({ where: eq(schema.services.id, serviceId) })

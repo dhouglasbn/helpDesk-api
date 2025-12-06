@@ -1,6 +1,7 @@
-import type { Request, Response } from "express"
-import type { OurRequest } from "../types/ourRequest.ts"
+// biome-ignore assist/source/organizeImports: <i dont care>
 import ServiceService from "../services/serviceService.ts"
+import type { OurRequest } from "../types/ourRequest.ts"
+import type { Response } from "express"
 
 export default class ServiceController {
 	private serviceService: ServiceService

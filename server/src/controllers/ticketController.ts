@@ -26,4 +26,16 @@ export default class TicketController {
 		}
 	}
 
+	showClientHistory = async (request: OurRequest, reply: Response) => {
+		if (!request.user?.role || request.user.role !== "client") {
+			return reply.status(403).json({ message: "Acesso negado: Somente o cliente pode criar serviços para os técnicos." })
+		}
+
+		try {
+			const history = await this.ticketService.showClientHistory(request.user.id)
+			return reply.status(200).json(history).send()
+		} catch (error) {
+			return reply.status(400).json({ error: (error as Error).message })
+		}
+	}
 }

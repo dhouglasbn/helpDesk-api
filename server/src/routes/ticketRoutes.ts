@@ -18,5 +18,6 @@ router.post(
 	),
 	ticketController.createTicket,
 )
+router.get("/clientHistory", authMiddleware, ticketController.showClientHistory)
 
 export { router as ticketRoutes }

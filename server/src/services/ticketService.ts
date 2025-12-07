@@ -1,7 +1,7 @@
 // biome-ignore assist/source/organizeImports: <i dont care>
 import { db } from "../db/connection.ts"
 import { schema } from "../db/schema/index.ts"
-import { eq, and, inArray } from "drizzle-orm"
+import { eq, and, inArray, sql, desc } from "drizzle-orm"
 
 export default class TicketService {
 
@@ -10,7 +10,11 @@ export default class TicketService {
     if (!techExists) throw new Error("Esse técnico não existe")
     
     const existingServices = await db
-      .select({ id: schema.services.id })
+      .select({ 
+        id: schema.services.id,
+        title: schema.services.title,
+        price: schema.services.price
+      })
       .from(schema.services)
       .where(inArray(schema.services.id, servicesIds))
 
@@ -44,7 +48,30 @@ export default class TicketService {
       techId: ticket.techId,
       status: ticket.status,
       createdAt: ticket.createdAt,
-      servicesIds: servicesIds
+      services: existingServices,
+      totalPrice: `${existingServices.reduce((acc, service) => acc + Number(service.price), 0)}.0`
     }
   }
+
+  showClientHistory = async(clientId: string) =>  await db
+    .select({
+      id: schema.tickets.id,
+      clientId: schema.tickets.clientId,
+      techId: schema.tickets.techId,
+      status: schema.tickets.status,
+      createdAt: schema.tickets.createdAt,
+      updatedAt: schema.tickets.updatedAt,
+      services: sql`json_agg(json_build_object(
+        'id', ${schema.services.id},
+        'title', ${schema.services.title},
+        'price', ${schema.services.price}::text
+      ))`,
+      totalPrice: sql`SUM(${schema.services.price}::numeric)`
+    })
+    .from(schema.tickets)
+    .leftJoin(schema.ticketServices, eq(schema.ticketServices.ticketId, schema.tickets.id))
+    .leftJoin(schema.services, eq(schema.services.id, schema.ticketServices.serviceId))
+    .where(eq(schema.tickets.clientId, clientId))
+    .groupBy(schema.tickets.id)
+    .orderBy(desc(schema.tickets.createdAt));
 }

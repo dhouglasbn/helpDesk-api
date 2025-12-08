@@ -1,6 +1,6 @@
 # Variables
 @baseUrl = http://localhost:3333
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjUyZmRkY2NlLWM3NmYtNDM2OS1iYzhhLTVmYjQzZGEwMjgzZSIsImVtYWlsIjoiY2xpZW50ZTFAZ21haWwuY29tIiwicm9sZSI6ImNsaWVudCIsImlhdCI6MTc2NTE0MDMwMywiZXhwIjoxNzY1MTQzOTAzfQ.9DMq3PmEugtyqtrHmlClSrHT49Rr5EJZl4aE_IMZUqU
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhkZmNlYjgwLTE5OWMtNDg4Zi04OTE4LWEwNjA5MTc1Mzk5YyIsImVtYWlsIjoiYWRtaW5pc3RyYWRvckBhZG1pbi5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NjUxNTE5MjAsImV4cCI6MTc2NTE1NTUyMH0.F63aQb6acKqu5sQdRxJc8IXcAzSuVe0kX9IXDzZPZC0
 
 ###
 
@@ -22,3 +22,43 @@ Authorization: Bearer {{token}}
 # @name showClientHistory
 GET {{baseUrl}}/tickets/clientHistory
 Authorization: Bearer {{token}}
+
+###
+
+# list tickets set to a tech
+# @name showTechTicketsList
+GET {{baseUrl}}/tickets/tech
+Authorization: Bearer {{token}}
+
+###
+
+# list all tickets to admin
+# @name listAllTickets
+GET {{baseUrl}}/tickets/list
+Authorization: Bearer {{token}}
+
+###
+
+# add services to a ticket
+# @name addServicesToATicket
+PUT {{baseUrl}}/tickets/addServices/fcb6c6e0-8115-46d1-b71e-6fb66e84359a
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer {{token}}
+
+{
+  "servicesIds": ["4878508a-2fd4-4005-8418-83fce08c0e50"]
+}
+
+###
+
+# add services to a ticket
+# @name addServicesToATicket
+PUT {{baseUrl}}/tickets/status/fcb6c6e0-8115-46d1-b71e-6fb66e84359a
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer {{token}}
+
+{
+  "status": "aberto"
+}

@@ -19,5 +19,23 @@ router.post(
 	ticketController.createTicket,
 )
 router.get("/clientHistory", authMiddleware, ticketController.showClientHistory)
+router.get("/tech", authMiddleware, ticketController.listTechTickets)
+router.get("/list", authMiddleware, ticketController.listAllTickets)
+router.put("/addServices/:ticketId", authMiddleware, validateZodSchema(
+		z.object({
+			servicesIds: z.uuid().array().min(1, "Informe pelo menos 1 serviço"),
+		}),
+		z.object({
+			ticketId: z.uuid()
+		})
+	), ticketController.addServicesToATicket)
+	router.put("/status/:ticketId", authMiddleware, validateZodSchema(
+		z.object({
+			status: z.enum(["aberto", "em_atendimento", "encerrado"])
+		}),
+		z.object({
+			ticketId: z.uuid()
+		})
+	), ticketController.updateTicketStatus)
 
 export { router as ticketRoutes }

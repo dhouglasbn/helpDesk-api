@@ -1,6 +1,6 @@
 # Variables
 @baseUrl = http://localhost:3333
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhkZmNlYjgwLTE5OWMtNDg4Zi04OTE4LWEwNjA5MTc1Mzk5YyIsImVtYWlsIjoiYWRtaW5pc3RyYWRvckBhZG1pbi5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NjUxMzM1MjYsImV4cCI6MTc2NTEzNzEyNn0.Va2KCGtYIze2HHyzoK6xg5enqb-szayFFdaNmphJJUI
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhkZmNlYjgwLTE5OWMtNDg4Zi04OTE4LWEwNjA5MTc1Mzk5YyIsImVtYWlsIjoiYWRtaW5pc3RyYWRvckBhZG1pbi5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NjUxNTE5MjAsImV4cCI6MTc2NTE1NTUyMH0.F63aQb6acKqu5sQdRxJc8IXcAzSuVe0kX9IXDzZPZC0
 
 ###
 
@@ -125,5 +125,5 @@ Authorization: Bearer {{token}}
 ###
 # delete Client Account
 # @name deleteClientAccount
-DELETE {{baseUrl}}/users/client/47b5d176-924c-418c-8e3e-a58a7f175801
+DELETE {{baseUrl}}/users/client/52fddcce-c76f-4369-bc8a-5fb43da0283e
 Authorization: Bearer {{token}}

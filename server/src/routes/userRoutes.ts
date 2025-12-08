@@ -48,8 +48,8 @@ router.put(
 		z.object({
 			newAvailabilities: z
 				.string()
-				.regex(/^([01]\d|2[0-3]):([0-5]\d)$/, {
-					message: "Horário inválido. Use o formato HH:MM (00–23 / 00–59).",
+				.regex(/^([01]\d|2[0-3]):00$/, {
+					message: "Horário inválido. Use o formato HH:00 (00–23 / 00).",
 				})
 				.array()
 				.min(1),

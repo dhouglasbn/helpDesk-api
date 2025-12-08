@@ -76,7 +76,7 @@ export default class UserController {
 
 	updateUserPicture = async (request: OurRequest, reply: Response) => {
 		if (request.user?.id && request.user.id !== request.params.id && request.user.role !== "admin") {
-			return reply.status(403).json({ message: "Acesso negado: Você só pode atualizar sua própria conta." })
+			return reply.status(403).json({ message: "Acesso negado: Você só pode atualizar a foto do seu próprio perfil." })
 		}
 		try {
 			if (request.file) {

@@ -18,7 +18,7 @@
 # 📌 Tecnologias Utilizadas
 ## Backend
 
-- Node.js
+- Node.js (v. 24.11.1)
 - TypeScript
 - Express
 - Zod (validação de entrada)
@@ -88,6 +88,8 @@ cd helpDesk/server
 ```
 
 2. Instalar dependências
+
+Instale as dependências considerando a versão 24.11.1 do node
 ``` bash
 npm install
 ```

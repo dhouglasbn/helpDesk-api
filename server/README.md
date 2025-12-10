@@ -84,7 +84,7 @@ GET /docs
 1. Clonar o repositório
 ``` bash
 git clone https://github.com/dhouglasbn/helpDesk.git
-cd helpDesk
+cd helpDesk/server
 ```
 
 2. Instalar dependências

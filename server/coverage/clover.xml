@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1768345543348" clover="3.2.0">
-  <project timestamp="1768345543352" name="All files">
-    <metrics statements="497" coveredstatements="165" conditionals="185" coveredconditionals="27" methods="70" coveredmethods="20" elements="752" coveredelements="212" complexity="0" loc="497" ncloc="497" packages="7" files="22" classes="22"/>
+<coverage generated="1768539877951" clover="3.2.0">
+  <project timestamp="1768539877954" name="All files">
+    <metrics statements="495" coveredstatements="341" conditionals="189" coveredconditionals="99" methods="70" coveredmethods="44" elements="754" coveredelements="484" complexity="0" loc="495" ncloc="495" packages="7" files="22" classes="22"/>
     <package name="src">
-      <metrics statements="26" coveredstatements="3" conditionals="2" coveredconditionals="0" methods="2" coveredmethods="0"/>
+      <metrics statements="27" coveredstatements="4" conditionals="6" coveredconditionals="2" methods="2" coveredmethods="0"/>
       <file name="env.ts" path="C:\Users\Dhoug\helpDesk\server\src\env.ts">
-        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="1" type="stmt"/>
-        <line num="3" count="1" type="stmt"/>
-        <line num="9" count="1" type="stmt"/>
+        <metrics statements="4" coveredstatements="4" conditionals="4" coveredconditionals="2" methods="0" coveredmethods="0"/>
+        <line num="1" count="3" type="stmt"/>
+        <line num="3" count="3" type="stmt"/>
+        <line num="5" count="3" type="stmt"/>
+        <line num="16" count="3" type="stmt"/>
       </file>
       <file name="server.ts" path="C:\Users\Dhoug\helpDesk\server\src\server.ts">
         <metrics statements="18" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="2" coveredmethods="0"/>
@@ -41,49 +42,49 @@
       </file>
     </package>
     <package name="src.controllers">
-      <metrics statements="193" coveredstatements="47" conditionals="101" coveredconditionals="17" methods="25" coveredmethods="8"/>
+      <metrics statements="193" coveredstatements="130" conditionals="101" coveredconditionals="61" methods="25" coveredmethods="20"/>
       <file name="serviceController.ts" path="C:\Users\Dhoug\helpDesk\server\src\controllers\serviceController.ts">
-        <metrics statements="33" coveredstatements="0" conditionals="12" coveredconditionals="0" methods="5" coveredmethods="0"/>
-        <line num="2" count="0" type="stmt"/>
-        <line num="6" count="0" type="stmt"/>
-        <line num="10" count="0" type="stmt"/>
-        <line num="13" count="0" type="stmt"/>
-        <line num="14" count="0" type="cond" truecount="0" falsecount="4"/>
-        <line num="15" count="0" type="stmt"/>
-        <line num="23" count="0" type="stmt"/>
-        <line num="25" count="0" type="stmt"/>
+        <metrics statements="33" coveredstatements="29" conditionals="12" coveredconditionals="10" methods="5" coveredmethods="5"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="14" count="13" type="cond" truecount="4" falsecount="0"/>
+        <line num="15" count="4" type="stmt"/>
+        <line num="20" count="9" type="stmt"/>
+        <line num="22" count="9" type="stmt"/>
+        <line num="23" count="9" type="stmt"/>
+        <line num="24" count="9" type="stmt"/>
         <line num="26" count="0" type="stmt"/>
-        <line num="27" count="0" type="stmt"/>
-        <line num="29" count="0" type="stmt"/>
-        <line num="33" count="0" type="stmt"/>
-        <line num="34" count="0" type="cond" truecount="0" falsecount="4"/>
-        <line num="35" count="0" type="stmt"/>
-        <line num="43" count="0" type="stmt"/>
-        <line num="45" count="0" type="stmt"/>
-        <line num="46" count="0" type="stmt"/>
-        <line num="47" count="0" type="stmt"/>
-        <line num="52" count="0" type="stmt"/>
-        <line num="54" count="0" type="stmt"/>
-        <line num="58" count="0" type="stmt"/>
-        <line num="59" count="0" type="cond" truecount="0" falsecount="4"/>
-        <line num="60" count="0" type="stmt"/>
-        <line num="68" count="0" type="stmt"/>
+        <line num="30" count="1" type="stmt"/>
+        <line num="31" count="2" type="cond" truecount="3" falsecount="1"/>
+        <line num="32" count="0" type="stmt"/>
+        <line num="37" count="2" type="stmt"/>
+        <line num="39" count="2" type="stmt"/>
+        <line num="40" count="2" type="stmt"/>
+        <line num="41" count="2" type="stmt"/>
+        <line num="42" count="1" type="stmt"/>
+        <line num="44" count="1" type="stmt"/>
+        <line num="48" count="1" type="stmt"/>
+        <line num="49" count="6" type="cond" truecount="3" falsecount="1"/>
+        <line num="50" count="0" type="stmt"/>
+        <line num="55" count="6" type="stmt"/>
+        <line num="56" count="6" type="stmt"/>
+        <line num="57" count="6" type="stmt"/>
+        <line num="58" count="5" type="stmt"/>
+        <line num="60" count="6" type="stmt"/>
+        <line num="64" count="1" type="stmt"/>
+        <line num="65" count="7" type="stmt"/>
+        <line num="66" count="7" type="stmt"/>
+        <line num="67" count="7" type="stmt"/>
         <line num="69" count="0" type="stmt"/>
-        <line num="70" count="0" type="stmt"/>
-        <line num="71" count="0" type="stmt"/>
-        <line num="73" count="0" type="stmt"/>
-        <line num="77" count="0" type="stmt"/>
-        <line num="78" count="0" type="stmt"/>
-        <line num="79" count="0" type="stmt"/>
-        <line num="80" count="0" type="stmt"/>
-        <line num="82" count="0" type="stmt"/>
       </file>
       <file name="ticketController.ts" path="C:\Users\Dhoug\helpDesk\server\src\controllers\ticketController.ts">
-        <metrics statements="50" coveredstatements="0" conditionals="26" coveredconditionals="0" methods="7" coveredmethods="0"/>
-        <line num="3" count="0" type="stmt"/>
-        <line num="7" count="0" type="stmt"/>
-        <line num="11" count="0" type="stmt"/>
-        <line num="14" count="0" type="stmt"/>
+        <metrics statements="50" coveredstatements="24" conditionals="26" coveredconditionals="12" methods="7" coveredmethods="4"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
         <line num="15" count="0" type="cond" truecount="0" falsecount="4"/>
         <line num="16" count="0" type="stmt"/>
         <line num="24" count="0" type="stmt"/>
@@ -91,28 +92,28 @@
         <line num="27" count="0" type="stmt"/>
         <line num="32" count="0" type="stmt"/>
         <line num="34" count="0" type="stmt"/>
-        <line num="38" count="0" type="stmt"/>
-        <line num="39" count="0" type="cond" truecount="0" falsecount="4"/>
-        <line num="40" count="0" type="stmt"/>
-        <line num="48" count="0" type="stmt"/>
-        <line num="49" count="0" type="stmt"/>
-        <line num="52" count="0" type="stmt"/>
+        <line num="38" count="1" type="stmt"/>
+        <line num="39" count="4" type="cond" truecount="4" falsecount="0"/>
+        <line num="40" count="2" type="stmt"/>
+        <line num="48" count="2" type="stmt"/>
+        <line num="49" count="2" type="stmt"/>
+        <line num="52" count="2" type="stmt"/>
         <line num="54" count="0" type="stmt"/>
-        <line num="58" count="0" type="stmt"/>
-        <line num="59" count="0" type="cond" truecount="0" falsecount="4"/>
-        <line num="60" count="0" type="stmt"/>
-        <line num="67" count="0" type="stmt"/>
-        <line num="68" count="0" type="stmt"/>
-        <line num="69" count="0" type="stmt"/>
+        <line num="58" count="1" type="stmt"/>
+        <line num="59" count="6" type="cond" truecount="4" falsecount="0"/>
+        <line num="60" count="2" type="stmt"/>
+        <line num="67" count="4" type="stmt"/>
+        <line num="68" count="4" type="stmt"/>
+        <line num="69" count="4" type="stmt"/>
         <line num="71" count="0" type="stmt"/>
-        <line num="75" count="0" type="stmt"/>
-        <line num="76" count="0" type="cond" truecount="0" falsecount="4"/>
-        <line num="77" count="0" type="stmt"/>
-        <line num="85" count="0" type="stmt"/>
-        <line num="86" count="0" type="stmt"/>
-        <line num="87" count="0" type="stmt"/>
+        <line num="75" count="1" type="stmt"/>
+        <line num="76" count="5" type="cond" truecount="4" falsecount="0"/>
+        <line num="77" count="2" type="stmt"/>
+        <line num="85" count="3" type="stmt"/>
+        <line num="86" count="3" type="stmt"/>
+        <line num="87" count="3" type="stmt"/>
         <line num="89" count="0" type="stmt"/>
-        <line num="93" count="0" type="stmt"/>
+        <line num="93" count="1" type="stmt"/>
         <line num="94" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="98" count="0" type="stmt"/>
         <line num="106" count="0" type="stmt"/>
@@ -121,7 +122,7 @@
         <line num="109" count="0" type="stmt"/>
         <line num="114" count="0" type="stmt"/>
         <line num="116" count="0" type="stmt"/>
-        <line num="120" count="0" type="stmt"/>
+        <line num="120" count="1" type="stmt"/>
         <line num="121" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="125" count="0" type="stmt"/>
         <line num="133" count="0" type="stmt"/>
@@ -132,46 +133,46 @@
         <line num="143" count="0" type="stmt"/>
       </file>
       <file name="userController.ts" path="C:\Users\Dhoug\helpDesk\server\src\controllers\userController.ts">
-        <metrics statements="110" coveredstatements="47" conditionals="63" coveredconditionals="17" methods="13" coveredmethods="8"/>
+        <metrics statements="110" coveredstatements="77" conditionals="63" coveredconditionals="39" methods="13" coveredmethods="11"/>
         <line num="3" count="1" type="stmt"/>
         <line num="4" count="1" type="stmt"/>
         <line num="6" count="1" type="stmt"/>
         <line num="11" count="1" type="stmt"/>
         <line num="12" count="1" type="stmt"/>
         <line num="15" count="1" type="stmt"/>
-        <line num="16" count="3" type="stmt"/>
-        <line num="18" count="3" type="stmt"/>
-        <line num="19" count="3" type="stmt"/>
-        <line num="20" count="0" type="stmt"/>
+        <line num="16" count="4" type="stmt"/>
+        <line num="18" count="4" type="stmt"/>
+        <line num="19" count="4" type="stmt"/>
+        <line num="20" count="1" type="stmt"/>
         <line num="22" count="3" type="stmt"/>
         <line num="26" count="1" type="stmt"/>
-        <line num="27" count="3" type="cond" truecount="3" falsecount="1"/>
+        <line num="27" count="6" type="cond" truecount="4" falsecount="0"/>
         <line num="28" count="3" type="stmt"/>
-        <line num="36" count="0" type="stmt"/>
-        <line num="38" count="0" type="stmt"/>
-        <line num="39" count="0" type="stmt"/>
-        <line num="44" count="0" type="stmt"/>
-        <line num="46" count="0" type="stmt"/>
+        <line num="36" count="3" type="stmt"/>
+        <line num="38" count="3" type="stmt"/>
+        <line num="39" count="3" type="stmt"/>
+        <line num="44" count="2" type="stmt"/>
+        <line num="46" count="1" type="stmt"/>
         <line num="50" count="1" type="stmt"/>
         <line num="51" count="4" type="stmt"/>
         <line num="52" count="4" type="stmt"/>
         <line num="53" count="4" type="stmt"/>
-        <line num="58" count="0" type="stmt"/>
-        <line num="60" count="4" type="stmt"/>
+        <line num="58" count="3" type="stmt"/>
+        <line num="60" count="1" type="stmt"/>
         <line num="64" count="1" type="stmt"/>
         <line num="65" count="2" type="cond" truecount="4" falsecount="0"/>
         <line num="66" count="1" type="stmt"/>
         <line num="74" count="1" type="stmt"/>
         <line num="75" count="1" type="stmt"/>
-        <line num="76" count="0" type="stmt"/>
-        <line num="78" count="1" type="stmt"/>
+        <line num="76" count="1" type="stmt"/>
+        <line num="78" count="0" type="stmt"/>
         <line num="82" count="1" type="stmt"/>
         <line num="83" count="2" type="cond" truecount="4" falsecount="0"/>
         <line num="84" count="1" type="stmt"/>
         <line num="92" count="1" type="stmt"/>
         <line num="93" count="1" type="stmt"/>
-        <line num="94" count="0" type="stmt"/>
-        <line num="96" count="1" type="stmt"/>
+        <line num="94" count="1" type="stmt"/>
+        <line num="96" count="0" type="stmt"/>
         <line num="100" count="1" type="stmt"/>
         <line num="101" count="4" type="cond" truecount="2" falsecount="0"/>
         <line num="106" count="3" type="stmt"/>
@@ -200,26 +201,26 @@
         <line num="170" count="0" type="stmt"/>
         <line num="172" count="0" type="stmt"/>
         <line num="176" count="1" type="stmt"/>
-        <line num="178" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="179" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="180" count="0" type="stmt"/>
-        <line num="187" count="0" type="stmt"/>
-        <line num="188" count="0" type="stmt"/>
-        <line num="189" count="0" type="stmt"/>
-        <line num="190" count="0" type="stmt"/>
-        <line num="194" count="0" type="stmt"/>
+        <line num="178" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="179" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="180" count="1" type="stmt"/>
+        <line num="187" count="1" type="stmt"/>
+        <line num="188" count="1" type="stmt"/>
+        <line num="189" count="1" type="stmt"/>
+        <line num="190" count="1" type="stmt"/>
+        <line num="194" count="1" type="stmt"/>
         <line num="196" count="0" type="stmt"/>
         <line num="200" count="1" type="stmt"/>
-        <line num="202" count="0" type="cond" truecount="0" falsecount="3"/>
-        <line num="204" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="202" count="2" type="cond" truecount="3" falsecount="0"/>
+        <line num="204" count="2" type="cond" truecount="1" falsecount="1"/>
         <line num="205" count="0" type="stmt"/>
-        <line num="212" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="212" count="2" type="cond" truecount="1" falsecount="1"/>
         <line num="217" count="0" type="stmt"/>
-        <line num="223" count="0" type="stmt"/>
-        <line num="224" count="0" type="stmt"/>
-        <line num="225" count="0" type="stmt"/>
-        <line num="226" count="0" type="stmt"/>
-        <line num="230" count="0" type="stmt"/>
+        <line num="223" count="2" type="stmt"/>
+        <line num="224" count="2" type="stmt"/>
+        <line num="225" count="2" type="stmt"/>
+        <line num="226" count="2" type="stmt"/>
+        <line num="230" count="2" type="stmt"/>
         <line num="232" count="0" type="stmt"/>
         <line num="236" count="1" type="stmt"/>
         <line num="238" count="0" type="cond" truecount="0" falsecount="3"/>
@@ -234,14 +235,14 @@
         <line num="266" count="0" type="stmt"/>
         <line num="268" count="0" type="stmt"/>
         <line num="272" count="1" type="stmt"/>
-        <line num="274" count="0" type="cond" truecount="0" falsecount="3"/>
-        <line num="276" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="277" count="0" type="stmt"/>
-        <line num="284" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="274" count="3" type="cond" truecount="3" falsecount="0"/>
+        <line num="276" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="277" count="1" type="stmt"/>
+        <line num="284" count="2" type="cond" truecount="1" falsecount="1"/>
         <line num="289" count="0" type="stmt"/>
-        <line num="295" count="0" type="stmt"/>
-        <line num="296" count="0" type="stmt"/>
-        <line num="297" count="0" type="stmt"/>
+        <line num="295" count="2" type="stmt"/>
+        <line num="296" count="2" type="stmt"/>
+        <line num="297" count="2" type="stmt"/>
         <line num="299" count="0" type="stmt"/>
       </file>
     </package>
@@ -249,147 +250,147 @@
       <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       <file name="connection.ts" path="C:\Users\Dhoug\helpDesk\server\src\db\connection.ts">
         <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="1" type="stmt"/>
-        <line num="2" count="1" type="stmt"/>
-        <line num="3" count="1" type="stmt"/>
-        <line num="4" count="1" type="stmt"/>
-        <line num="6" count="1" type="stmt"/>
-        <line num="7" count="1" type="stmt"/>
+        <line num="1" count="3" type="stmt"/>
+        <line num="2" count="3" type="stmt"/>
+        <line num="3" count="3" type="stmt"/>
+        <line num="4" count="3" type="stmt"/>
+        <line num="6" count="3" type="stmt"/>
+        <line num="7" count="3" type="stmt"/>
       </file>
     </package>
     <package name="src.db.schema">
       <metrics statements="34" coveredstatements="28" conditionals="0" coveredconditionals="0" methods="8" coveredmethods="1"/>
       <file name="index.ts" path="C:\Users\Dhoug\helpDesk\server\src\db\schema\index.ts">
         <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="1" type="stmt"/>
-        <line num="2" count="1" type="stmt"/>
-        <line num="3" count="1" type="stmt"/>
-        <line num="4" count="1" type="stmt"/>
-        <line num="5" count="1" type="stmt"/>
-        <line num="7" count="1" type="stmt"/>
+        <line num="1" count="3" type="stmt"/>
+        <line num="2" count="3" type="stmt"/>
+        <line num="3" count="3" type="stmt"/>
+        <line num="4" count="3" type="stmt"/>
+        <line num="5" count="3" type="stmt"/>
+        <line num="7" count="3" type="stmt"/>
       </file>
       <file name="services.ts" path="C:\Users\Dhoug\helpDesk\server\src\db\schema\services.ts">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="1" type="stmt"/>
-        <line num="3" count="1" type="stmt"/>
+        <line num="1" count="3" type="stmt"/>
+        <line num="3" count="3" type="stmt"/>
       </file>
       <file name="techAvailabilities.ts" path="C:\Users\Dhoug\helpDesk\server\src\db\schema\techAvailabilities.ts">
         <metrics statements="7" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
-        <line num="1" count="1" type="stmt"/>
-        <line num="2" count="1" type="stmt"/>
-        <line num="3" count="1" type="stmt"/>
-        <line num="5" count="1" type="stmt"/>
+        <line num="1" count="3" type="stmt"/>
+        <line num="2" count="3" type="stmt"/>
+        <line num="3" count="3" type="stmt"/>
+        <line num="5" count="3" type="stmt"/>
         <line num="8" count="0" type="stmt"/>
-        <line num="13" count="1" type="stmt"/>
+        <line num="13" count="3" type="stmt"/>
         <line num="15" count="0" type="stmt"/>
       </file>
       <file name="tickets.ts" path="C:\Users\Dhoug\helpDesk\server\src\db\schema\tickets.ts">
         <metrics statements="6" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
-        <line num="1" count="1" type="stmt"/>
-        <line num="2" count="1" type="stmt"/>
-        <line num="4" count="1" type="stmt"/>
-        <line num="6" count="1" type="stmt"/>
+        <line num="1" count="3" type="stmt"/>
+        <line num="2" count="3" type="stmt"/>
+        <line num="4" count="3" type="stmt"/>
+        <line num="6" count="3" type="stmt"/>
         <line num="9" count="0" type="stmt"/>
         <line num="12" count="0" type="stmt"/>
       </file>
       <file name="ticketsServices.ts" path="C:\Users\Dhoug\helpDesk\server\src\db\schema\ticketsServices.ts">
         <metrics statements="7" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="1"/>
-        <line num="1" count="1" type="stmt"/>
-        <line num="2" count="1" type="stmt"/>
-        <line num="3" count="1" type="stmt"/>
-        <line num="5" count="1" type="stmt"/>
+        <line num="1" count="3" type="stmt"/>
+        <line num="2" count="3" type="stmt"/>
+        <line num="3" count="3" type="stmt"/>
+        <line num="5" count="3" type="stmt"/>
         <line num="9" count="0" type="stmt"/>
         <line num="12" count="0" type="stmt"/>
-        <line num="15" count="1" type="stmt"/>
+        <line num="15" count="3" type="stmt"/>
       </file>
       <file name="users.ts" path="C:\Users\Dhoug\helpDesk\server\src\db\schema\users.ts">
         <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
-        <line num="1" count="1" type="stmt"/>
-        <line num="2" count="1" type="stmt"/>
-        <line num="3" count="1" type="stmt"/>
-        <line num="5" count="1" type="stmt"/>
-        <line num="7" count="1" type="stmt"/>
-        <line num="16" count="1" type="stmt"/>
+        <line num="1" count="3" type="stmt"/>
+        <line num="2" count="3" type="stmt"/>
+        <line num="3" count="3" type="stmt"/>
+        <line num="5" count="3" type="stmt"/>
+        <line num="7" count="3" type="stmt"/>
+        <line num="16" count="3" type="stmt"/>
       </file>
     </package>
     <package name="src.middlewares">
-      <metrics statements="36" coveredstatements="28" conditionals="16" coveredconditionals="10" methods="6" coveredmethods="5"/>
+      <metrics statements="36" coveredstatements="29" conditionals="16" coveredconditionals="11" methods="6" coveredmethods="5"/>
       <file name="authMiddleware.ts" path="C:\Users\Dhoug\helpDesk\server\src\middlewares\authMiddleware.ts">
         <metrics statements="15" coveredstatements="13" conditionals="4" coveredconditionals="3" methods="1" coveredmethods="1"/>
-        <line num="1" count="1" type="stmt"/>
-        <line num="3" count="1" type="stmt"/>
-        <line num="6" count="1" type="stmt"/>
-        <line num="11" count="38" type="stmt"/>
-        <line num="12" count="38" type="stmt"/>
-        <line num="14" count="38" type="cond" truecount="2" falsecount="0"/>
-        <line num="15" count="9" type="stmt"/>
-        <line num="18" count="29" type="stmt"/>
-        <line num="20" count="29" type="cond" truecount="1" falsecount="1"/>
+        <line num="1" count="3" type="stmt"/>
+        <line num="3" count="3" type="stmt"/>
+        <line num="6" count="3" type="stmt"/>
+        <line num="11" count="181" type="stmt"/>
+        <line num="12" count="181" type="stmt"/>
+        <line num="14" count="181" type="cond" truecount="2" falsecount="0"/>
+        <line num="15" count="30" type="stmt"/>
+        <line num="18" count="151" type="stmt"/>
+        <line num="20" count="151" type="cond" truecount="1" falsecount="1"/>
         <line num="21" count="0" type="stmt"/>
-        <line num="23" count="29" type="stmt"/>
-        <line num="24" count="29" type="stmt"/>
-        <line num="25" count="29" type="stmt"/>
-        <line num="26" count="29" type="stmt"/>
+        <line num="23" count="151" type="stmt"/>
+        <line num="24" count="151" type="stmt"/>
+        <line num="25" count="151" type="stmt"/>
+        <line num="26" count="151" type="stmt"/>
         <line num="28" count="0" type="stmt"/>
       </file>
       <file name="validateDataMiddleware.ts" path="C:\Users\Dhoug\helpDesk\server\src\middlewares\validateDataMiddleware.ts">
-        <metrics statements="21" coveredstatements="15" conditionals="12" coveredconditionals="7" methods="5" coveredmethods="4"/>
-        <line num="5" count="1" type="stmt"/>
-        <line num="14" count="7" type="stmt"/>
-        <line num="15" count="26" type="cond" truecount="1" falsecount="1"/>
-        <line num="16" count="26" type="stmt"/>
-        <line num="18" count="26" type="cond" truecount="2" falsecount="0"/>
-        <line num="19" count="5" type="stmt"/>
-        <line num="21" count="14" type="stmt"/>
-        <line num="25" count="21" type="stmt"/>
-        <line num="28" count="21" type="cond" truecount="2" falsecount="0"/>
-        <line num="29" count="14" type="stmt"/>
-        <line num="30" count="14" type="cond" truecount="1" falsecount="1"/>
-        <line num="31" count="14" type="stmt"/>
-        <line num="33" count="14" type="stmt"/>
-        <line num="36" count="0" type="stmt"/>
-        <line num="39" count="7" type="cond" truecount="1" falsecount="1"/>
+        <metrics statements="21" coveredstatements="16" conditionals="12" coveredconditionals="8" methods="5" coveredmethods="4"/>
+        <line num="5" count="3" type="stmt"/>
+        <line num="14" count="13" type="stmt"/>
+        <line num="15" count="126" type="cond" truecount="1" falsecount="1"/>
+        <line num="16" count="126" type="stmt"/>
+        <line num="18" count="126" type="cond" truecount="2" falsecount="0"/>
+        <line num="19" count="50" type="stmt"/>
+        <line num="21" count="78" type="stmt"/>
+        <line num="25" count="76" type="stmt"/>
+        <line num="28" count="76" type="cond" truecount="2" falsecount="0"/>
+        <line num="29" count="53" type="stmt"/>
+        <line num="30" count="53" type="cond" truecount="2" falsecount="0"/>
+        <line num="31" count="38" type="stmt"/>
+        <line num="33" count="38" type="stmt"/>
+        <line num="36" count="15" type="stmt"/>
+        <line num="39" count="38" type="cond" truecount="1" falsecount="1"/>
         <line num="40" count="0" type="stmt"/>
         <line num="41" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="42" count="0" type="stmt"/>
         <line num="44" count="0" type="stmt"/>
         <line num="47" count="0" type="stmt"/>
-        <line num="49" count="7" type="stmt"/>
+        <line num="49" count="38" type="stmt"/>
       </file>
     </package>
     <package name="src.routes">
-      <metrics statements="48" coveredstatements="22" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <metrics statements="48" coveredstatements="48" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       <file name="serviceRoutes.ts" path="C:\Users\Dhoug\helpDesk\server\src\routes\serviceRoutes.ts">
-        <metrics statements="12" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="0" type="stmt"/>
-        <line num="2" count="0" type="stmt"/>
-        <line num="3" count="0" type="stmt"/>
-        <line num="4" count="0" type="stmt"/>
-        <line num="5" count="0" type="stmt"/>
-        <line num="7" count="0" type="stmt"/>
-        <line num="8" count="0" type="stmt"/>
-        <line num="10" count="0" type="stmt"/>
-        <line num="21" count="0" type="stmt"/>
-        <line num="22" count="0" type="stmt"/>
-        <line num="36" count="0" type="stmt"/>
-        <line num="48" count="0" type="stmt"/>
+        <metrics statements="12" coveredstatements="12" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="21" count="1" type="stmt"/>
+        <line num="22" count="1" type="stmt"/>
+        <line num="36" count="1" type="stmt"/>
+        <line num="48" count="1" type="stmt"/>
       </file>
       <file name="ticketRoutes.ts" path="C:\Users\Dhoug\helpDesk\server\src\routes\ticketRoutes.ts">
-        <metrics statements="14" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="0" type="stmt"/>
-        <line num="2" count="0" type="stmt"/>
-        <line num="3" count="0" type="stmt"/>
-        <line num="4" count="0" type="stmt"/>
-        <line num="5" count="0" type="stmt"/>
-        <line num="7" count="0" type="stmt"/>
-        <line num="8" count="0" type="stmt"/>
-        <line num="10" count="0" type="stmt"/>
-        <line num="21" count="0" type="stmt"/>
-        <line num="26" count="0" type="stmt"/>
-        <line num="27" count="0" type="stmt"/>
-        <line num="28" count="0" type="stmt"/>
-        <line num="41" count="0" type="stmt"/>
-        <line num="55" count="0" type="stmt"/>
+        <metrics statements="14" coveredstatements="14" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="21" count="1" type="stmt"/>
+        <line num="26" count="1" type="stmt"/>
+        <line num="27" count="1" type="stmt"/>
+        <line num="28" count="1" type="stmt"/>
+        <line num="41" count="1" type="stmt"/>
+        <line num="55" count="1" type="stmt"/>
       </file>
       <file name="userRoutes.ts" path="C:\Users\Dhoug\helpDesk\server\src\routes\userRoutes.ts">
         <metrics statements="22" coveredstatements="22" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
@@ -418,9 +419,9 @@
       </file>
     </package>
     <package name="src.services">
-      <metrics statements="154" coveredstatements="31" conditionals="66" coveredconditionals="0" methods="29" coveredmethods="6"/>
+      <metrics statements="151" coveredstatements="96" conditionals="66" coveredconditionals="25" methods="29" coveredmethods="18"/>
       <file name="authService.ts" path="C:\Users\Dhoug\helpDesk\server\src\services\authService.ts">
-        <metrics statements="15" coveredstatements="9" conditionals="4" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <metrics statements="15" coveredstatements="15" conditionals="4" coveredconditionals="4" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -429,85 +430,82 @@
         <line num="6" count="1" type="stmt"/>
         <line num="8" count="1" type="stmt"/>
         <line num="10" count="1" type="stmt"/>
-        <line num="11" count="3" type="stmt"/>
-        <line num="14" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="15" count="0" type="stmt"/>
-        <line num="18" count="0" type="stmt"/>
-        <line num="19" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="20" count="0" type="stmt"/>
-        <line num="24" count="0" type="stmt"/>
+        <line num="11" count="4" type="stmt"/>
+        <line num="14" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="18" count="2" type="stmt"/>
+        <line num="19" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="24" count="1" type="stmt"/>
       </file>
       <file name="serviceService.ts" path="C:\Users\Dhoug\helpDesk\server\src\services\serviceService.ts">
-        <metrics statements="18" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="4" coveredmethods="0"/>
-        <line num="2" count="0" type="stmt"/>
-        <line num="3" count="0" type="stmt"/>
-        <line num="4" count="0" type="stmt"/>
-        <line num="6" count="0" type="stmt"/>
-        <line num="8" count="0" type="stmt"/>
-        <line num="9" count="0" type="stmt"/>
-        <line num="17" count="0" type="stmt"/>
-        <line num="18" count="0" type="stmt"/>
-        <line num="21" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="22" count="0" type="stmt"/>
-        <line num="25" count="0" type="stmt"/>
-        <line num="35" count="0" type="stmt"/>
-        <line num="36" count="0" type="stmt"/>
-        <line num="39" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="40" count="0" type="stmt"/>
-        <line num="43" count="0" type="stmt"/>
-        <line num="52" count="0" type="stmt"/>
-        <line num="53" count="0" type="stmt"/>
+        <metrics statements="18" coveredstatements="18" conditionals="4" coveredconditionals="4" methods="4" coveredmethods="4"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="9" count="9" type="stmt"/>
+        <line num="17" count="1" type="stmt"/>
+        <line num="18" count="2" type="stmt"/>
+        <line num="21" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="22" count="1" type="stmt"/>
+        <line num="25" count="1" type="stmt"/>
+        <line num="35" count="1" type="stmt"/>
+        <line num="36" count="6" type="stmt"/>
+        <line num="39" count="6" type="cond" truecount="2" falsecount="0"/>
+        <line num="40" count="1" type="stmt"/>
+        <line num="43" count="5" type="stmt"/>
+        <line num="52" count="1" type="stmt"/>
+        <line num="53" count="7" type="stmt"/>
       </file>
       <file name="ticketService.ts" path="C:\Users\Dhoug\helpDesk\server\src\services\ticketService.ts">
-        <metrics statements="45" coveredstatements="0" conditionals="18" coveredconditionals="0" methods="11" coveredmethods="0"/>
-        <line num="2" count="0" type="stmt"/>
-        <line num="3" count="0" type="stmt"/>
-        <line num="4" count="0" type="stmt"/>
-        <line num="8" count="0" type="stmt"/>
-        <line num="9" count="0" type="stmt"/>
-        <line num="14" count="0" type="stmt"/>
-        <line num="15" count="0" type="stmt"/>
-        <line num="34" count="0" type="stmt"/>
-        <line num="36" count="0" type="stmt"/>
+        <metrics statements="42" coveredstatements="13" conditionals="18" coveredconditionals="0" methods="11" coveredmethods="3"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="10" count="0" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
+        <line num="27" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="29" count="0" type="stmt"/>
         <line num="38" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="39" count="0" type="stmt"/>
+        <line num="42" count="0" type="stmt"/>
         <line num="43" count="0" type="stmt"/>
-        <line num="57" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="51" count="0" type="stmt"/>
+        <line num="52" count="0" type="stmt"/>
         <line num="58" count="0" type="stmt"/>
         <line num="61" count="0" type="stmt"/>
-        <line num="62" count="0" type="stmt"/>
-        <line num="70" count="0" type="stmt"/>
-        <line num="71" count="0" type="stmt"/>
-        <line num="77" count="0" type="stmt"/>
-        <line num="80" count="0" type="stmt"/>
-        <line num="87" count="0" type="stmt"/>
-        <line num="91" count="0" type="stmt"/>
-        <line num="92" count="0" type="stmt"/>
-        <line num="120" count="0" type="stmt"/>
-        <line num="121" count="0" type="stmt"/>
+        <line num="68" count="0" type="stmt"/>
+        <line num="72" count="1" type="stmt"/>
+        <line num="73" count="2" type="stmt"/>
+        <line num="95" count="1" type="stmt"/>
+        <line num="96" count="4" type="stmt"/>
+        <line num="118" count="1" type="stmt"/>
+        <line num="119" count="3" type="stmt"/>
+        <line num="140" count="1" type="stmt"/>
+        <line num="141" count="0" type="stmt"/>
+        <line num="144" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="145" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="146" count="0" type="stmt"/>
         <line num="149" count="0" type="stmt"/>
-        <line num="150" count="0" type="stmt"/>
-        <line num="177" count="0" type="stmt"/>
-        <line num="182" count="0" type="stmt"/>
-        <line num="185" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="186" count="0" type="cond" truecount="0" falsecount="4"/>
-        <line num="187" count="0" type="stmt"/>
-        <line num="192" count="0" type="stmt"/>
-        <line num="206" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="207" count="0" type="stmt"/>
-        <line num="210" count="0" type="stmt"/>
-        <line num="211" count="0" type="stmt"/>
-        <line num="213" count="0" type="stmt"/>
-        <line num="216" count="0" type="stmt"/>
-        <line num="225" count="0" type="stmt"/>
-        <line num="230" count="0" type="stmt"/>
-        <line num="233" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="234" count="0" type="cond" truecount="0" falsecount="4"/>
-        <line num="235" count="0" type="stmt"/>
-        <line num="240" count="0" type="stmt"/>
+        <line num="158" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="159" count="0" type="stmt"/>
+        <line num="162" count="0" type="stmt"/>
+        <line num="163" count="0" type="stmt"/>
+        <line num="165" count="0" type="stmt"/>
+        <line num="168" count="0" type="stmt"/>
+        <line num="177" count="1" type="stmt"/>
+        <line num="178" count="0" type="stmt"/>
+        <line num="181" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="182" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="183" count="0" type="stmt"/>
+        <line num="186" count="0" type="stmt"/>
       </file>
       <file name="userService.ts" path="C:\Users\Dhoug\helpDesk\server\src\services\userService.ts">
-        <metrics statements="76" coveredstatements="22" conditionals="40" coveredconditionals="0" methods="13" coveredmethods="5"/>
+        <metrics statements="76" coveredstatements="50" conditionals="40" coveredconditionals="17" methods="13" coveredmethods="10"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
         <line num="4" count="1" type="stmt"/>
@@ -515,34 +513,34 @@
         <line num="6" count="1" type="stmt"/>
         <line num="9" count="1" type="stmt"/>
         <line num="11" count="1" type="stmt"/>
-        <line num="12" count="0" type="stmt"/>
-        <line num="15" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="16" count="0" type="stmt"/>
-        <line num="19" count="0" type="stmt"/>
-        <line num="21" count="0" type="stmt"/>
-        <line num="32" count="0" type="stmt"/>
-        <line num="42" count="0" type="stmt"/>
-        <line num="47" count="0" type="stmt"/>
-        <line num="48" count="0" type="stmt"/>
+        <line num="12" count="3" type="stmt"/>
+        <line num="15" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="19" count="2" type="stmt"/>
+        <line num="21" count="2" type="stmt"/>
+        <line num="32" count="2" type="stmt"/>
+        <line num="42" count="16" type="stmt"/>
+        <line num="47" count="2" type="stmt"/>
+        <line num="48" count="2" type="stmt"/>
         <line num="51" count="1" type="stmt"/>
         <line num="56" count="4" type="stmt"/>
-        <line num="59" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="60" count="0" type="stmt"/>
-        <line num="63" count="0" type="stmt"/>
-        <line num="65" count="0" type="stmt"/>
+        <line num="59" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="60" count="1" type="stmt"/>
+        <line num="63" count="3" type="stmt"/>
+        <line num="65" count="3" type="stmt"/>
         <line num="76" count="1" type="stmt"/>
         <line num="77" count="1" type="stmt"/>
         <line num="94" count="1" type="stmt"/>
         <line num="95" count="1" type="stmt"/>
         <line num="99" count="1" type="stmt"/>
-        <line num="103" count="0" type="stmt"/>
-        <line num="107" count="0" type="stmt"/>
-        <line num="110" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="103" count="1" type="stmt"/>
+        <line num="107" count="1" type="stmt"/>
+        <line num="110" count="1" type="cond" truecount="3" falsecount="1"/>
         <line num="111" count="0" type="stmt"/>
-        <line num="114" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="114" count="1" type="cond" truecount="2" falsecount="2"/>
         <line num="115" count="0" type="stmt"/>
-        <line num="118" count="0" type="stmt"/>
-        <line num="120" count="0" type="stmt"/>
+        <line num="118" count="1" type="stmt"/>
+        <line num="120" count="1" type="stmt"/>
         <line num="131" count="1" type="stmt"/>
         <line num="135" count="0" type="stmt"/>
         <line num="139" count="0" type="stmt"/>
@@ -553,14 +551,14 @@
         <line num="150" count="0" type="stmt"/>
         <line num="152" count="0" type="stmt"/>
         <line num="163" count="1" type="stmt"/>
-        <line num="167" count="0" type="stmt"/>
-        <line num="171" count="0" type="stmt"/>
-        <line num="174" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="167" count="2" type="stmt"/>
+        <line num="171" count="2" type="stmt"/>
+        <line num="174" count="2" type="cond" truecount="3" falsecount="1"/>
         <line num="175" count="0" type="stmt"/>
-        <line num="178" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="178" count="2" type="cond" truecount="2" falsecount="2"/>
         <line num="179" count="0" type="stmt"/>
-        <line num="182" count="0" type="stmt"/>
-        <line num="184" count="0" type="stmt"/>
+        <line num="182" count="2" type="stmt"/>
+        <line num="184" count="2" type="stmt"/>
         <line num="195" count="1" type="stmt"/>
         <line num="199" count="0" type="stmt"/>
         <line num="202" count="0" type="cond" truecount="0" falsecount="4"/>
@@ -580,10 +578,10 @@
         <line num="245" count="0" type="stmt"/>
         <line num="248" count="0" type="stmt"/>
         <line num="251" count="1" type="stmt"/>
-        <line num="252" count="0" type="stmt"/>
-        <line num="255" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="252" count="2" type="stmt"/>
+        <line num="255" count="2" type="cond" truecount="3" falsecount="1"/>
         <line num="256" count="0" type="stmt"/>
-        <line num="259" count="0" type="stmt"/>
+        <line num="259" count="2" type="stmt"/>
       </file>
     </package>
   </project>

@@ -6,12 +6,13 @@ A comprehensive Jest test suite for all user routes in the helpdesk API, ensurin
 
 ## Test Coverage
 
-### 45 Total Tests covering:
+### 46 Total Tests covering:
 
-#### 1. **POST /users/login** (3 tests)
+#### 1. **POST /users/login** (4 tests)
 
 - Successful login returns token
 - Invalid credentials handling
+- Email exists but password is wrong
 - Missing email validation
 
 #### 2. **POST /users/tech** - Create Tech Account (3 tests)

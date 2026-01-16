@@ -1,6 +1,6 @@
 What to include
 
-- Install only Playwright test runner (no extra frameworks)
+- Install only Jest test runner (no extra frameworks)
 - Configure baseURL and a reasonable timout (at most 5 seconds)
 - Create a tests/ directory
 - CI: Github Actions workflow

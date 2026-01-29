@@ -1,0 +1,64 @@
+# Variables
+@baseUrl = http://localhost:3333
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjNhNGI1NzMxLWUzZmYtNGY3Zi05NWRkLTM0Y2E3MWI1ZjE3MSIsImVtYWlsIjoiY2xpZW50ZTFAZ21haWwuY29tIiwicm9sZSI6ImNsaWVudCIsImlhdCI6MTc2OTYzMTc2OSwiZXhwIjoxNzY5NjM1MzY5fQ.E0UW_9hoJ2iG3tNC1shhErIAy2pAFiiMtIuhudtEWP4
+
+###
+
+# create ticket
+# @name createTicket
+POST {{baseUrl}}/tickets
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer {{token}}
+
+{
+  "techId": "b9f0f153-4bc2-4576-9a8f-7b78762b2b37",
+  "servicesIds": ["33807cc5-731e-4bf4-888c-d56a27745ef5", "08bc85dc-e13f-472d-a156-4d6cc026934e"]
+}
+
+###
+
+# show client history of tickets
+# @name showClientHistory
+GET {{baseUrl}}/tickets/clientHistory
+Authorization: Bearer {{token}}
+
+###
+
+# list tickets set to a tech
+# @name showTechTicketsList
+GET {{baseUrl}}/tickets/tech
+Authorization: Bearer {{token}}
+
+###
+
+# list all tickets to admin
+# @name listAllTickets
+GET {{baseUrl}}/tickets/list
+Authorization: Bearer {{token}}
+
+###
+
+# add services to a ticket
+# @name addServicesToATicket
+PUT {{baseUrl}}/tickets/addServices/14370032-cd35-48de-af53-80a9c2766deb
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer {{token}}
+
+{
+  "servicesIds": ["4878508a-2fd4-4005-8418-83fce08c0e50"]
+}
+
+###
+
+# update ticket status
+# @name updateTicketStatus
+PUT {{baseUrl}}/tickets/status/14370032-cd35-48de-af53-80a9c2766deb
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer {{token}}
+
+{
+  "status": "em_atendimento"
+}

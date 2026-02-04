@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
 
     services:
-      postgres:
+      pg_test:
         image: bitnami/postgresql:latest
         env:
           POSTGRES_USER: docker

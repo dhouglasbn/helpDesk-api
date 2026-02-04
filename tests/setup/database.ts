@@ -115,64 +115,26 @@ export async function runMigrations() {
  */
 export async function cleanupTestDatabase() {
 	try {
-		// Try to drop and recreate the database, but if that fails, just clear the schema
-		try {
-			// Close the current connection first
-			const currentSql = sql
-			// Reconnect to postgres database (not helpdesk_test) to drop helpdesk_test
-			const adminSql = await import("postgres").then((m) =>
-				m.default("postgres://docker:docker@localhost:5433/postgres"),
-			)
+		await sql.unsafe(`
+      DO $$ DECLARE
+        r RECORD;
+      BEGIN
+        -- Drop tables
+        FOR r IN (SELECT tablename FROM pg_tables WHERE schemaname = 'public') LOOP
+          EXECUTE 'DROP TABLE IF EXISTS ' || quote_ident(r.tablename) || ' CASCADE';
+        END LOOP;
 
-			await adminSql`DROP DATABASE IF EXISTS helpdesk_test`
-			await adminSql`CREATE DATABASE helpdesk_test`
-			await adminSql.end()
+        -- Drop enums
+        FOR r IN (
+          SELECT typname FROM pg_type
+          WHERE typtype = 'e'
+          AND typnamespace = 'public'::regnamespace
+        ) LOOP
+          EXECUTE 'DROP TYPE IF EXISTS public.' || quote_ident(r.typname) || ' CASCADE';
+        END LOOP;
+      END $$;
+    `)
 
-			console.log("Database recreated successfully")
-		} catch (dbError) {
-			console.warn("Could not recreate database via admin connection, falling back to schema cleanup")
-
-			// Fallback: drop all objects in public schema
-			// First, get all tables
-			// biome-ignore lint/suspicious/noExplicitAny: <any is ok>
-			const tablesResult: any[] = await sql`
-        SELECT tablename FROM pg_tables 
-        WHERE schemaname = 'public'
-      `
-
-			const tables = tablesResult.map((row) => row.tablename)
-
-			// Drop all tables with CASCADE to remove foreign keys and types
-			for (const table of tables) {
-				try {
-					await sql.unsafe(`DROP TABLE IF EXISTS "${table}" CASCADE`)
-				} catch (e) {
-					// Table might have been dropped already
-				}
-			}
-
-			// Now drop any orphaned types (enums)
-			try {
-				// biome-ignore lint/suspicious/noExplicitAny: <any is ok>
-				const typesResult: any[] = await sql`
-          SELECT typname FROM pg_type 
-          WHERE typnamespace = (SELECT oid FROM pg_namespace WHERE nspname = 'public')
-          AND typtype = 'e'
-        `
-
-				for (const typeRow of typesResult) {
-					try {
-						await sql.unsafe(`DROP TYPE IF EXISTS "public"."${typeRow.typname}" CASCADE`)
-					} catch (e) {
-						// Type might have been dropped, continue
-					}
-				}
-			} catch (e) {
-				// No types to drop
-			}
-		}
-
-		// Now run migrations to recreate schema
 		await runMigrations()
 	} catch (error) {
 		console.error("Failed to cleanup test database:", error)

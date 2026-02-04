@@ -1,16 +1,16 @@
-import { Router } from "express";
-import UserController from "../controllers/userController.ts";
-import { authMiddleware } from "../middlewares/authMiddleware.ts";
-import { validateZodSchema } from "../middlewares/validateDataMiddleware.ts";
-import { z } from "zod";
-import multer from "multer";
+import { Router } from "express"
+import UserController from "../controllers/userController.ts"
+import { authMiddleware } from "../middlewares/authMiddleware.ts"
+import { validateZodSchema } from "../middlewares/validateDataMiddleware.ts"
+import { z } from "zod"
+import multer from "multer"
 
-const router = Router();
-const userController = new UserController();
-const upload = multer({ storage: multer.memoryStorage() });
+const router = Router()
+const userController = new UserController()
+const upload = multer({ storage: multer.memoryStorage() })
 
 // login
-router.post("/login", userController.login);
+router.post("/login", userController.login)
 
 // CRUD tech accounts
 router.post(
@@ -21,11 +21,13 @@ router.post(
 			name: z.string().min(3),
 			email: z.email(),
 			password: z.string().min(6),
+			phone: z.string().min(10),
+			address: z.string().min(5),
 		}),
 	),
 	userController.createTechAccount,
-);
-router.get("/techList", authMiddleware, userController.listTechAccounts);
+)
+router.get("/techList", authMiddleware, userController.listTechAccounts)
 router.put(
 	"/tech/:id",
 	authMiddleware,
@@ -34,13 +36,15 @@ router.put(
 			newName: z.string().min(3),
 			newEmail: z.email(),
 			newPassword: z.string().min(6),
+			newPhone: z.string().min(10),
+			newAddress: z.string().min(5),
 		}),
 		z.object({
 			id: z.uuid(),
 		}),
 	),
 	userController.updateTechAccount,
-);
+)
 router.put(
 	"/techAvailabilities/:id",
 	authMiddleware,
@@ -59,7 +63,7 @@ router.put(
 		}),
 	),
 	userController.updateTechAvailabilities,
-);
+)
 
 router.put(
 	"/admin/:id",
@@ -69,13 +73,15 @@ router.put(
 			newName: z.string().min(3),
 			newEmail: z.email(),
 			newPassword: z.string().min(6),
+			newPhone: z.string().min(10),
+			newAddress: z.string().min(5),
 		}),
 		z.object({
 			id: z.uuid(),
 		}),
 	),
 	userController.updateAdminAccount,
-);
+)
 
 // CRUD de clients
 router.post(
@@ -85,10 +91,12 @@ router.post(
 			name: z.string().min(3),
 			email: z.email(),
 			password: z.string().min(6),
+			phone: z.string().min(10),
+			address: z.string().min(5),
 		}),
 	),
 	userController.createClientAccount,
-);
+)
 router.put(
 	"/client/:id",
 	authMiddleware,
@@ -97,14 +105,16 @@ router.put(
 			newName: z.string().min(3),
 			newEmail: z.email(),
 			newPassword: z.string().min(6),
+			newPhone: z.string().min(10),
+			newAddress: z.string().min(5),
 		}),
 		z.object({
 			id: z.uuid(),
 		}),
 	),
 	userController.updateClientAccount,
-);
-router.get("/clientList", authMiddleware, userController.listClientAccounts);
+)
+router.get("/clientList", authMiddleware, userController.listClientAccounts)
 router.delete(
 	"/client/:id",
 	authMiddleware,
@@ -115,7 +125,7 @@ router.delete(
 		}),
 	),
 	userController.deleteClientAccount,
-);
+)
 
 // GET e UPLOAD da foto de usuário
 router.put(
@@ -129,7 +139,7 @@ router.put(
 		}),
 	),
 	userController.updateUserPicture,
-);
+)
 router.get(
 	"/picture/:id",
 	validateZodSchema(
@@ -139,6 +149,6 @@ router.get(
 		}),
 	),
 	userController.getUserPicture,
-);
+)
 
-export { router as userRoutes };
+export { router as userRoutes }

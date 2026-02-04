@@ -9,11 +9,12 @@ export const users = pgTable("users", {
 	name: varchar("name").notNull(),
 	email: varchar("email").notNull().unique(),
 	passwordHash: varchar("password_hash").notNull(),
+	phone: varchar("phone").notNull(),
+	address: varchar("address").notNull(),
 	role: userRoleEnum("role").notNull(),
 	picture: varchar("picture"),
 })
 
 export const userRelations = relations(users, ({ many }) => ({
-	availabilities: many(techniciansAvailabilities)
+	availabilities: many(techniciansAvailabilities),
 }))
-

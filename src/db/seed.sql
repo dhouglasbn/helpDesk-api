@@ -1,9 +1,11 @@
-INSERT INTO users (id, name, email, password_hash, role)
+INSERT INTO users (id, name, email, password_hash, phone, address, role)
 VALUES (
   '8dfceb80-199c-488f-8918-a0609175399c',
   'Administrador',
   'administrador@admin.com',
   '$2b$10$049vvxbTsOW3IiqoEVUKM.4.au3WCHO5I24MxCZw3GzBwadPHf8WO',
+  '99999-9999',
+  'Rua Administrador, 123 - Admin City',
   'admin'
 ) ON CONFLICT (id) DO NOTHING;
 
@@ -15,10 +17,10 @@ INSERT INTO services (id, title, price, active) VALUES
   ('33807cc5-731e-4bf4-888c-d56a27745ef5', 'Suporte a periféricos', 60.0, true)
   ON CONFLICT (id) DO NOTHING;
 
-INSERT INTO users (id, name, email, password_hash, role, picture) VALUES
-  ('b9f0f153-4bc2-4576-9a8f-7b78762b2b37', 'Técnico 1', 'tecnico1@tech.com', '$2b$10$m.C.STCN2JBQIFJH/XOxaetUw.2.cAGnB9rnS6PHsTdBUpWtty9Ke', 'tech', 'foto1.jpg'),
-  ('8717d531-97de-43f5-a1dd-e1bdcc20140d', 'Técnico 2', 'tecnico2@tech.com', '$2b$10$Ae8yqNB7DDJUpoeyNdK67ekBFtdsDUF7PBWVJEvv/fiRrpwm5tU7m', 'tech', 'foto2.jpg'),
-  ('a290e17b-d0a3-4b36-b3dd-75a3e810be7b', 'Técnico 3', 'tecnico3@tech.com', '$2b$10$NsnNWhGVUzApTi/vGEwTWOLaT0phxHmh.WUbkYXnVn.MZL9dF4YOm', 'tech', 'foto3.jpg')
+INSERT INTO users (id, name, email, password_hash, phone, address, role, picture) VALUES
+  ('b9f0f153-4bc2-4576-9a8f-7b78762b2b37', 'Técnico 1', 'tecnico1@tech.com', '$2b$10$m.C.STCN2JBQIFJH/XOxaetUw.2.cAGnB9rnS6PHsTdBUpWtty9Ke', '99999-9999', 'Rua Técnico 1, 456 - Tech City', 'tech', 'foto1.jpg'),
+  ('8717d531-97de-43f5-a1dd-e1bdcc20140d', 'Técnico 2', 'tecnico2@tech.com', '$2b$10$Ae8yqNB7DDJUpoeyNdK67ekBFtdsDUF7PBWVJEvv/fiRrpwm5tU7m', '88888-8888', 'Rua Técnico 2, 789 - Tech City', 'tech', 'foto2.jpg'),
+  ('a290e17b-d0a3-4b36-b3dd-75a3e810be7b', 'Técnico 3', 'tecnico3@tech.com', '$2b$10$NsnNWhGVUzApTi/vGEwTWOLaT0phxHmh.WUbkYXnVn.MZL9dF4YOm', '77777-7777', 'Rua Técnico 3, 101 - Tech City', 'tech', 'foto3.jpg')
   ON CONFLICT (id) DO NOTHING;
 
 INSERT INTO technician_availability (id, user_id, time) VALUES

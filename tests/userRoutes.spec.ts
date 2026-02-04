@@ -37,6 +37,8 @@ describe("User Routes", () => {
 					picture: "teste.png",
 					passwordHash: hashed,
 					role: "client",
+					phone: "1234567890",
+					address: "123 Test St",
 				})
 				.returning()
 			mockClientId = createdUser.id
@@ -50,6 +52,8 @@ describe("User Routes", () => {
 					email: "techmock@example.com",
 					picture: "teste.png",
 					passwordHash: hashedTech,
+					phone: "1234567890",
+					address: "123 Main St",
 					role: "tech",
 				})
 				.returning()
@@ -64,6 +68,8 @@ describe("User Routes", () => {
 					email: "adminmock@example.com",
 					picture: "teste.png",
 					passwordHash: hashedAdmin,
+					phone: "1234567890",
+					address: "123 Main St",
 					role: "admin",
 				})
 				.returning()
@@ -134,6 +140,8 @@ describe("User Routes", () => {
 				name: "Técnico Novo",
 				email: "tech@example.com",
 				password: "password123",
+				phone: "1234567890",
+				address: "123 Main St",
 			})
 			expect(response.status).toBe(403)
 			expect(response.body.message).toContain("admin")
@@ -144,6 +152,8 @@ describe("User Routes", () => {
 				name: "Técnico Novo",
 				email: "tech@example.com",
 				password: "password123",
+				phone: "1234567890",
+				address: "123 Main St",
 			})
 			expect(response.status).toBe(401)
 		})
@@ -153,6 +163,8 @@ describe("User Routes", () => {
 				name: "ab", // too short
 				email: "invalid-email",
 				password: "short", // too short
+				phone: "1234567890",
+				address: "123 Main St",
 			})
 			expect(response.status).toBe(400)
 		})
@@ -163,6 +175,8 @@ describe("User Routes", () => {
 				name: "João Silva - Técnico",
 				email: techEmail,
 				password: "TechPassword123!",
+				phone: "1234567890",
+				address: "123 Main St",
 			})
 
 			expect(response.status).toBe(201)
@@ -181,6 +195,8 @@ describe("User Routes", () => {
 				name: "Técnico Dois",
 				email: mockClientEmail, // Same email as first request
 				password: "AnotherPassword123!",
+				phone: "1234567890",
+				address: "123 Main St",
 			})
 
 			expect(response.status).toBe(400)
@@ -218,6 +234,8 @@ describe("User Routes", () => {
 					newName: "Técnico Atualizado",
 					newEmail: "newemail@example.com",
 					newPassword: "newpassword123",
+					newPhone: "9876543210",
+					newAddress: "456 Updated St",
 				})
 			// Tech can update their own account but not others (or validation error if other)
 			expect(response.status).toBe(403)
@@ -228,6 +246,8 @@ describe("User Routes", () => {
 				newName: "Técnico Atualizado",
 				newEmail: "newemail@example.com",
 				newPassword: "newpassword123",
+				newPhone: "9876543210",
+				newAddress: "456 Updated St",
 			})
 
 			expect(response.status).toBe(401)
@@ -241,6 +261,8 @@ describe("User Routes", () => {
 					newName: "ab", // too short
 					newEmail: "invalid-email",
 					newPassword: "short",
+					newPhone: "9876543210",
+					newAddress: "456 Updated St",
 				})
 			expect(response.status).toBe(400)
 		})
@@ -254,6 +276,8 @@ describe("User Routes", () => {
 					email: "tech@example.com",
 					picture: "teste.png",
 					passwordHash: hashed,
+					phone: "1234567890",
+					address: "123 Main St",
 					role: "tech",
 				})
 				.returning()
@@ -265,6 +289,8 @@ describe("User Routes", () => {
 					newName: "Técnico Atualizado",
 					newEmail: "updated@example.com",
 					newPassword: "newpassword123",
+					newPhone: "9876543210",
+					newAddress: "456 Updated St",
 				})
 
 			expect(response.status).toBe(200)
@@ -273,6 +299,8 @@ describe("User Routes", () => {
 			expect(result).toHaveProperty("id", tech.id)
 			expect(result).toHaveProperty("name", "Técnico Atualizado")
 			expect(result).toHaveProperty("email", "updated@example.com")
+			expect(result).toHaveProperty("phone", "9876543210")
+			expect(result).toHaveProperty("address", "456 Updated St")
 			expect(result).toHaveProperty("passwordHash")
 		})
 
@@ -286,6 +314,8 @@ describe("User Routes", () => {
 					email: "tech@example.com",
 					picture: "teste.png",
 					passwordHash: hashed,
+					phone: "1234567890",
+					address: "123 Main St",
 					role: "tech",
 				})
 				.returning()
@@ -300,6 +330,8 @@ describe("User Routes", () => {
 					newName: "Técnico Atualizado com Sucesso",
 					newEmail,
 					newPassword: "NewTechPassword123!",
+					newPhone: "9876543210",
+					newAddress: "456 Updated St",
 				})
 
 			expect(response.status).toBe(200)
@@ -309,6 +341,8 @@ describe("User Routes", () => {
 			expect(result).toHaveProperty("name", "Técnico Atualizado com Sucesso")
 			expect(result).toHaveProperty("email", newEmail)
 			expect(result).toHaveProperty("passwordHash")
+			expect(result).toHaveProperty("phone", "9876543210")
+			expect(result).toHaveProperty("address", "456 Updated St")
 		})
 
 		it("should return 400 when tech ID doesn't exist", async () => {
@@ -320,6 +354,8 @@ describe("User Routes", () => {
 					newName: "Técnico Atualizado",
 					newEmail: "updated@example.com",
 					newPassword: "newpassword123",
+					newPhone: "9876543210",
+					newAddress: "456 Updated St",
 				})
 
 			expect(response.status).toBe(400)
@@ -335,6 +371,8 @@ describe("User Routes", () => {
 					newName: "Técnico Atualizado",
 					newEmail: "updated@example.com",
 					newPassword: "newpassword123",
+					newPhone: "9876543210",
+					newAddress: "456 Updated St",
 				})
 
 			expect(response.status).toBe(400)
@@ -354,6 +392,8 @@ describe("User Routes", () => {
 					email: email2,
 					picture: "teste.png",
 					passwordHash: hashed,
+					phone: "1234567890",
+					address: "123 Main St",
 					role: "tech",
 				})
 				.returning()
@@ -366,6 +406,8 @@ describe("User Routes", () => {
 					newName: "Técnico Um Atualizado",
 					newEmail: tech2.email, // Try to use tech2's email
 					newPassword: "NewPassword123!",
+					newPhone: "9876543210",
+					newAddress: "456 Updated St",
 				})
 
 			expect(response.status).toBe(400)
@@ -481,6 +523,8 @@ describe("User Routes", () => {
 					newName: "Admin Atualizado",
 					newEmail: "adminmock@example.com",
 					newPassword: "newpassword123",
+					newPhone: "9876543210",
+					newAddress: "456 Updated St",
 				})
 			expect(response.status).toBe(403)
 			expect(response.body.message).toContain("admin")
@@ -491,6 +535,8 @@ describe("User Routes", () => {
 				newName: "Admin Atualizado",
 				newEmail: "adminmock@example.com",
 				newPassword: "newpassword123",
+				newPhone: "9876543210",
+				newAddress: "456 Updated St",
 			})
 			expect(response.status).toBe(401)
 		})
@@ -504,6 +550,8 @@ describe("User Routes", () => {
 					name: "Admin Update Test",
 					email: `adminupdate.${Date.now()}@example.com`,
 					passwordHash: hashed,
+					phone: "1234567890",
+					address: "123 Main St",
 					role: "admin",
 				})
 				.returning()
@@ -517,6 +565,8 @@ describe("User Routes", () => {
 					newName: "Admin Atualizado com Sucesso",
 					newEmail,
 					newPassword: "newpassword123",
+					newPhone: "9876543210",
+					newAddress: "456 Updated St",
 				})
 			expect(response.status).toBe(200)
 			expect(response.body).toHaveProperty("newAdmin")
@@ -524,6 +574,8 @@ describe("User Routes", () => {
 			expect(updatedAdmin.name).toBe("Admin Atualizado com Sucesso")
 			expect(updatedAdmin.email).toBe(newEmail)
 			expect(updatedAdmin).toHaveProperty("passwordHash")
+			expect(updatedAdmin.phone).toBe("9876543210")
+			expect(updatedAdmin.address).toBe("456 Updated St")
 		})
 
 		it("should return 400 when admin ID from params doesn't exist", async () => {
@@ -536,6 +588,8 @@ describe("User Routes", () => {
 					newName: "Admin Atualizado",
 					newEmail: "admin.new@example.com",
 					newPassword: "newpassword123",
+					newPhone: "9876543210",
+					newAddress: "456 Updated St",
 				})
 			expect(response.status).toBe(400)
 			expect(response.body).toHaveProperty("error")
@@ -550,6 +604,8 @@ describe("User Routes", () => {
 					newName: "Admin Atualizado",
 					newEmail: "admin.new@example.com",
 					newPassword: "newpassword123",
+					newPhone: "9876543210",
+					newAddress: "456 Updated St",
 				})
 			expect(response.status).toBe(400)
 			expect(response.body).toHaveProperty("error")
@@ -564,6 +620,8 @@ describe("User Routes", () => {
 					name: "Another Admin",
 					email: `anotherAdmin${Date.now()}@example.com`,
 					passwordHash: hashed,
+					phone: "1234567890",
+					address: "123 Main St",
 					role: "admin",
 				})
 				.returning()
@@ -574,6 +632,8 @@ describe("User Routes", () => {
 					newName: "Admin Atualizado",
 					newEmail: anotherAdmin.email, // Try to use existing email
 					newPassword: "newpassword123",
+					newPhone: "9876543210",
+					newAddress: "456 Updated St",
 				})
 			expect(response.status).toBe(400)
 			expect(response.body).toHaveProperty("error")
@@ -589,6 +649,8 @@ describe("User Routes", () => {
 					name: "Cliente Novo",
 					email: `client${Date.now()}@example.com`,
 					password: "password123",
+					phone: "9876543210",
+					address: "456 Updated St",
 				})
 
 			expect(response.status).toBe(201)
@@ -604,6 +666,8 @@ describe("User Routes", () => {
 				name: "ab", // too short
 				email: "invalid-email",
 				password: "short",
+				newPhone: "98",
+				newAddress: "456",
 			})
 
 			expect(response.status).toBe(400)
@@ -614,6 +678,8 @@ describe("User Routes", () => {
 				name: "Cliente Um",
 				email: mockClientEmail,
 				password: "password123",
+				phone: "01234567890",
+				address: "123 Main St",
 			}
 
 			// Second request with same email
@@ -630,6 +696,8 @@ describe("User Routes", () => {
 				newName: "Cliente Atualizado",
 				newEmail: "newemail@example.com",
 				newPassword: "newpassword123",
+				newPhone: "9876543210",
+				newAddress: "456 Updated St",
 			})
 			expect(response.status).toBe(401)
 		})
@@ -642,6 +710,8 @@ describe("User Routes", () => {
 					newName: "Cliente Atualizado",
 					newEmail: "client.updated@example.com",
 					newPassword: "newpassword123",
+					newPhone: "9876543210",
+					newAddress: "456 Updated St",
 				})
 			expect(response.status).toBe(200)
 			expect(response.body).toHaveProperty("newClient")
@@ -660,6 +730,8 @@ describe("User Routes", () => {
 					newName: "Cliente Atualizado",
 					newEmail: "updated@example.com",
 					newPassword: "newpassword123",
+					newPhone: "9876543210",
+					newAddress: "456 Updated St",
 				})
 			expect(response.status).toBe(400)
 		})
@@ -672,6 +744,8 @@ describe("User Routes", () => {
 					newName: "Cliente Atualizado",
 					newEmail: "updated.by.admin@example.com",
 					newPassword: "newpassword123",
+					newPhone: "9876543210",
+					newAddress: "456 Updated St",
 				})
 			expect(response.status).toBe(200)
 			expect(response.body).toHaveProperty("newClient")
@@ -689,6 +763,8 @@ describe("User Routes", () => {
 					newName: "ab",
 					newEmail: "invalid-email",
 					newPassword: "short",
+					newPhone: "9876543210",
+					newAddress: "456 Updated St",
 				})
 			expect(response.status).toBe(400)
 		})
@@ -702,6 +778,8 @@ describe("User Routes", () => {
 					newName: "Cliente Atualizado",
 					newEmail: "updated@example.com",
 					newPassword: "newpassword123",
+					newPhone: "9876543210",
+					newAddress: "456 Updated St",
 				})
 
 			expect(response.status).toBe(400)
@@ -717,6 +795,8 @@ describe("User Routes", () => {
 					newName: "Cliente Atualizado",
 					newEmail: "updated@example.com",
 					newPassword: "newpassword123",
+					newPhone: "9876543210",
+					newAddress: "456 Updated St",
 				})
 
 			expect(response.status).toBe(400)
@@ -734,6 +814,8 @@ describe("User Routes", () => {
 					email: "clientmock2@example.com",
 					picture: "teste.png",
 					passwordHash: hashed,
+					phone: "1234567890",
+					address: "123 Test St",
 					role: "client",
 				})
 				.returning()
@@ -746,6 +828,8 @@ describe("User Routes", () => {
 					newName: "Cliente Um Atualizado",
 					newEmail: newClient.email, // Try to use client2's email
 					newPassword: "NewPassword123!",
+					newPhone: "9876543210",
+					newAddress: "456 Updated St",
 				})
 
 			expect(response.status).toBe(400)
@@ -789,6 +873,8 @@ describe("User Routes", () => {
 					name: "Client Delete Test",
 					email: `clientdelete.${Date.now()}@example.com`,
 					passwordHash: hashed,
+					phone: "1234567890",
+					address: "123 Main St",
 					role: "client",
 				})
 				.returning()
@@ -813,6 +899,8 @@ describe("User Routes", () => {
 					name: "Client Delete Test",
 					email: `clientdelete.${Date.now()}@example.com`,
 					passwordHash: hashed,
+					phone: "1234567890",
+					address: "123 Main St",
 					role: "client",
 				})
 				.returning()
@@ -830,6 +918,8 @@ describe("User Routes", () => {
 					name: "Client Delete Test",
 					email: `clientdelete.${Date.now()}@example.com`,
 					passwordHash: hashed,
+					phone: "1234567890",
+					address: "123 Main St",
 					role: "client",
 				})
 				.returning()
@@ -887,6 +977,8 @@ describe("User Routes", () => {
 					name: "Picture Test User",
 					email: `pictureuser.${Date.now()}@example.com`,
 					passwordHash: hashed,
+					phone: "1234567890",
+					address: "123 Main St",
 					role: "client",
 				})
 				.returning()
@@ -908,6 +1000,8 @@ describe("User Routes", () => {
 					name: "Picture Test User",
 					email: `pictureuser.${Date.now()}@example.com`,
 					passwordHash: hashed,
+					phone: "1234567890",
+					address: "123 Main St",
 					role: "client",
 				})
 				.returning()
@@ -927,6 +1021,8 @@ describe("User Routes", () => {
 					name: "Picture Admin Test User",
 					email: `pictureadmintest.${Date.now()}@example.com`,
 					passwordHash: hashed,
+					phone: "1234567890",
+					address: "123 Main St",
 					role: "client",
 				})
 				.returning()
@@ -987,6 +1083,8 @@ describe("User Routes", () => {
 					name: "Técnico Novo",
 					email: "tech@example.com",
 					password: "password123",
+					phone: "1234567890",
+					address: "123 Main St",
 				})
 			expect(clientResponse.status).toBe(403)
 
@@ -996,6 +1094,8 @@ describe("User Routes", () => {
 				name: "Técnico Novo",
 				email: "tech2@example.com",
 				password: "password123",
+				phone: "1234567890",
+				address: "123 Main St",
 			})
 			expect(techResponse.status).toBe(403)
 		})
@@ -1011,6 +1111,8 @@ describe("User Routes", () => {
 					newName: "Updated",
 					newEmail: "updated@example.com",
 					newPassword: "newpass123",
+					newPhone: "9876543210",
+					newAddress: "456 Updated St",
 				})
 			// Will succeed if it's their own ID, fail if not
 			expect([200, 403, 400]).toContain(response.status)
@@ -1024,6 +1126,8 @@ describe("User Routes", () => {
 					name: "New Client",
 					email: `client${Date.now()}@example.com`,
 					password: "password123",
+					phone: "1234567890",
+					address: "123 Main St",
 				})
 			expect([201, 400]).toContain(response.status)
 		})

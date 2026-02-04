@@ -14,13 +14,9 @@ export default class TicketService {
 				email: schema.users.email,
 			})
 			.from(schema.users)
-			.where(
-				and(
-					eq(schema.users.id, techId),
-					eq(schema.users.role, "tech")
-				),
-			)
+			.where(and(eq(schema.users.id, techId), eq(schema.users.role, "tech")))
 
+		// biome-ignore lint/style/useBlockStatements: <i prefer this way>
 		if (!availableTech[0]) throw new Error("Esse técnico não existe ou não está disponível no momento.")
 
 		const existingServices = await db
@@ -138,7 +134,9 @@ export default class TicketService {
 		const ticket = await db.query.tickets.findFirst({
 			where: eq(schema.tickets.id, ticketId),
 		})
-		if (!ticket) throw new Error("Esse chamado não existe")
+		if (!ticket) {
+			throw new Error("Esse chamado não existe")
+		}
 		if (ticket.techId !== user.id && user.role !== "admin") {
 			throw new Error("Acesso negado: você só pode adicionar serviços aos seus chamados")
 		}
@@ -175,6 +173,7 @@ export default class TicketService {
 		const ticket = await db.query.tickets.findFirst({
 			where: eq(schema.tickets.id, ticketId),
 		})
+		// biome-ignore lint/style/useBlockStatements: <i prefer this way>
 		if (!ticket) throw new Error("Esse chamado não existe")
 		if (ticket.techId !== user.id && user.role !== "admin") {
 			throw new Error("Acesso negado: você só pode atualizar o status dos seus chamados")

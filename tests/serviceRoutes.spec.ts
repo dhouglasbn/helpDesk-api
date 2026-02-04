@@ -25,7 +25,6 @@ describe("Service Routes", () => {
 	let mockClientToken = "";
 
 	// Mock UUIDs
-	const serviceId = "55555555-5555-5555-5555-555555555555";
 	const invalidUUID = "not-a-uuid";
 	const nonExistentUUID = "550e8400-e29b-41d4-a716-446655440000";
 
@@ -39,6 +38,8 @@ describe("Service Routes", () => {
 					name: "Client User",
 					email: `client.${Date.now()}@test.com`,
 					passwordHash: hashedClient,
+					phone: "1234567890",
+					address: "123 Test St",
 					role: "client",
 				})
 				.returning();
@@ -50,6 +51,8 @@ describe("Service Routes", () => {
 					name: "Admin User",
 					email: `admin.${Date.now()}@test.com`,
 					passwordHash: hashedAdmin,
+					phone: "1234567890",
+					address: "123 Test St",
 					role: "admin",
 				})
 				.returning();
@@ -61,6 +64,8 @@ describe("Service Routes", () => {
 					name: "Tech User 1",
 					email: `tech1.${Date.now()}@test.com`,
 					passwordHash: hashedTech,
+					phone: "1234567890",
+					address: "123 Test St",
 					role: "tech",
 				})
 				.returning();
@@ -93,7 +98,7 @@ describe("Service Routes", () => {
 		}
 	});
 
-	beforeEach(async () => {
+	beforeEach(() => {
 		// Reset app for each test
 		app = express();
 		app.use(cors());

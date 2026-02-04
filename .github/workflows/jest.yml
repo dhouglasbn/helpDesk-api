@@ -13,13 +13,13 @@ jobs:
 
     services:
       postgres:
-        image: postgres:16
+        image: bitnami/postgresql:latest
         env:
-          POSTGRES_USER: test
-          POSTGRES_PASSWORD: test
-          POSTGRES_DB: test_db
+          POSTGRES_USER: docker
+          POSTGRES_PASSWORD: docker
+          POSTGRES_DB: helpdesk_test
         ports:
-          - 5432:5432
+          - 5433:5432
         options: >-
           --health-cmd="pg_isready"
           --health-interval=10s
@@ -34,5 +34,5 @@ jobs:
       - run: npm ci
       - name: Run Jest (E2E-first)
         env:
-          DATABASE_URL: postgres://test:test@localhost:5432/test_db
+          DATABASE_URL: postgres://test:test@localhost:5432/helpdesk_test
         run: npm test

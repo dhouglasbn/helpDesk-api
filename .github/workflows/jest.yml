@@ -19,7 +19,7 @@ jobs:
           POSTGRES_PASSWORD: docker
           POSTGRES_DB: helpdesk_test
         ports:
-          - 5432:5432
+          - 5433:5432
         options: >-
           --health-cmd="pg_isready -U docker"
           --health-interval=10s
@@ -34,5 +34,5 @@ jobs:
       - run: npm ci
       - name: Run Jest (E2E-first)
         env:
-          DATABASE_URL: postgres://docker:docker@localhost:5432/helpdesk_test
+          DATABASE_URL: postgres://docker:docker@localhost:5433/helpdesk_test
         run: npm test

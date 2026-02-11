@@ -295,7 +295,7 @@ describe("User Routes", () => {
 
 			expect(response.status).toBe(200)
 			expect(response.body).toHaveProperty("newTech")
-			const [result] = response.body.newTech
+			const result = response.body.newTech
 			expect(result).toHaveProperty("id", tech.id)
 			expect(result).toHaveProperty("name", "Técnico Atualizado")
 			expect(result).toHaveProperty("email", "updated@example.com")
@@ -336,7 +336,7 @@ describe("User Routes", () => {
 
 			expect(response.status).toBe(200)
 			expect(response.body).toHaveProperty("newTech")
-			const [result] = response.body.newTech
+			const result = response.body.newTech
 			expect(result).toHaveProperty("id", tech.id)
 			expect(result).toHaveProperty("name", "Técnico Atualizado com Sucesso")
 			expect(result).toHaveProperty("email", newEmail)
@@ -655,7 +655,7 @@ describe("User Routes", () => {
 
 			expect(response.status).toBe(201)
 			expect(response.body).toHaveProperty("newClient")
-			const [result] = response.body.newClient
+			const result = response.body.newClient
 			expect(result).toHaveProperty("id")
 			expect(result).toHaveProperty("name", "Cliente Novo")
 			expect(result).toHaveProperty("email")

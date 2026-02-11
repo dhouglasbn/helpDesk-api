@@ -50,13 +50,14 @@ export default class UserController {
 	createClientAccount = async (request: OurRequest, reply: Response) => {
 		const { name, email, password, phone, address } = request.body
 		try {
-			const newClient = await this.userService.createClientAccount({
+			const result = await this.userService.createClientAccount({
 				name,
 				email,
 				password,
 				phone,
 				address,
 			})
+			const newClient = result[0]
 			return reply.status(201).json({ newClient })
 		} catch (error) {
 			return reply.status(400).json({ error: (error as Error).message })
@@ -135,7 +136,7 @@ export default class UserController {
 		try {
 			const updatingUserId = request.params.id
 			const { newName, newEmail, newPassword, newPhone, newAddress } = request.body
-			const newTech = await this.userService.updateTechAccount({
+			const result = await this.userService.updateTechAccount({
 				updatingUserId,
 				newName,
 				newEmail,
@@ -143,6 +144,7 @@ export default class UserController {
 				newPhone,
 				newAddress,
 			})
+			const newTech = result[0]
 			return reply.status(200).json({ newTech })
 		} catch (error) {
 			return reply.status(400).json({ error: (error as Error).message })

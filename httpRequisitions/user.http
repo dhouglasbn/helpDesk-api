@@ -1,6 +1,6 @@
 # Variables
 @baseUrl = http://localhost:3333
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhkZmNlYjgwLTE5OWMtNDg4Zi04OTE4LWEwNjA5MTc1Mzk5YyIsImVtYWlsIjoiYWRtaW5pc3RyYWRvckBhZG1pbi5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3Njk2MTc0ODMsImV4cCI6MTc2OTYyMTA4M30.vBI8TA6Kv12VTzufDlyCgODkAeyIyMt-3gnTJj3wXoA
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhkZmNlYjgwLTE5OWMtNDg4Zi04OTE4LWEwNjA5MTc1Mzk5YyIsImVtYWlsIjoiYWRtaW5pc3RyYWRvckBhZG1pbi5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NzA3Njk2ODIsImV4cCI6MTc3MDc3MzI4Mn0.Xx60XC8OqAXWnTPFyxLohGkXrG6UOjnOLyy5dE49puo
 
 @techId = c6e5ce26-e2f5-4f3b-8f7e-611afdb74ebe
 
@@ -14,9 +14,11 @@ Accept: application/json
 Authorization: Bearer {{token}}
 
 {
-  "name": "Tech test 3",
-  "email": "techtest3@tech.com",
-  "password": "tempPassword"
+  "name": "Tech test 4",
+  "email": "techtest4@tech.com",
+  "password": "tempPassword",
+  "phone": "11999999999",
+  "address": "Rua teste, 123"
 }
 
 ###
@@ -28,9 +30,11 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "name": "cliente 1",
-  "email": "cliente1@gmail.com",
-  "password": "password"
+  "name": "cliente 4",
+  "email": "cliente4@gmail.com",
+  "password": "password",
+  "phone": "11999999999",
+  "address": "Rua teste, 123"
 }
 
 ###

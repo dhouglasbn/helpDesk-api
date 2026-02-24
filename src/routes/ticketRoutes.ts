@@ -9,13 +9,13 @@ const ticketController = new TicketController();
 
 router.post(
 	"/",
-	authMiddleware,
 	validateZodSchema(
 		z.object({
 			techId: z.uuid("Informe um identificador válido para o técnico"),
 			servicesIds: z.uuid().array().min(1, "Informe pelo menos 1 serviço"),
 		}),
 	),
+	authMiddleware,
 	ticketController.createTicket,
 );
 router.get(
@@ -27,7 +27,6 @@ router.get("/tech", authMiddleware, ticketController.listTechTickets);
 router.get("/list", authMiddleware, ticketController.listAllTickets);
 router.put(
 	"/addServices/:ticketId",
-	authMiddleware,
 	validateZodSchema(
 		z.object({
 			servicesIds: z.uuid().array().min(1, "Informe pelo menos 1 serviço"),
@@ -36,11 +35,11 @@ router.put(
 			ticketId: z.uuid(),
 		}),
 	),
+	authMiddleware,
 	ticketController.addServicesToATicket,
 );
 router.put(
 	"/status/:ticketId",
-	authMiddleware,
 	validateZodSchema(
 		z.object({
 			status: z.enum(["aberto", "em_atendimento", "encerrado"]),
@@ -49,6 +48,7 @@ router.put(
 			ticketId: z.uuid(),
 		}),
 	),
+	authMiddleware,
 	ticketController.updateTicketStatus,
 );
 

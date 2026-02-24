@@ -15,7 +15,6 @@ router.post("/login", userController.login)
 // CRUD tech accounts
 router.post(
 	"/tech",
-	authMiddleware,
 	validateZodSchema(
 		z.object({
 			name: z.string().min(3),
@@ -25,12 +24,12 @@ router.post(
 			address: z.string().min(5),
 		}),
 	),
+	authMiddleware,
 	userController.createTechAccount,
 )
 router.get("/techList", authMiddleware, userController.listTechAccounts)
 router.put(
 	"/tech/:id",
-	authMiddleware,
 	validateZodSchema(
 		z.object({
 			newName: z.string().min(3),
@@ -43,11 +42,11 @@ router.put(
 			id: z.uuid(),
 		}),
 	),
+	authMiddleware,
 	userController.updateTechAccount,
 )
 router.put(
 	"/techAvailabilities/:id",
-	authMiddleware,
 	validateZodSchema(
 		z.object({
 			newAvailabilities: z
@@ -62,12 +61,12 @@ router.put(
 			id: z.uuid(),
 		}),
 	),
+	authMiddleware,
 	userController.updateTechAvailabilities,
 )
 
 router.put(
 	"/admin/:id",
-	authMiddleware,
 	validateZodSchema(
 		z.object({
 			newName: z.string().min(3),
@@ -80,6 +79,7 @@ router.put(
 			id: z.uuid(),
 		}),
 	),
+	authMiddleware,
 	userController.updateAdminAccount,
 )
 
@@ -99,7 +99,6 @@ router.post(
 )
 router.put(
 	"/client/:id",
-	authMiddleware,
 	validateZodSchema(
 		z.object({
 			newName: z.string().min(3),
@@ -112,18 +111,19 @@ router.put(
 			id: z.uuid(),
 		}),
 	),
+	authMiddleware,
 	userController.updateClientAccount,
 )
 router.get("/clientList", authMiddleware, userController.listClientAccounts)
 router.delete(
 	"/client/:id",
-	authMiddleware,
 	validateZodSchema(
 		undefined,
 		z.object({
 			id: z.uuid(),
 		}),
 	),
+	authMiddleware,
 	userController.deleteClientAccount,
 )
 
@@ -131,13 +131,13 @@ router.delete(
 router.put(
 	"/picture/:id",
 	upload.single("profilePic"),
-	authMiddleware,
 	validateZodSchema(
 		undefined,
 		z.object({
 			id: z.uuid(),
 		}),
 	),
+	authMiddleware,
 	userController.updateUserPicture,
 )
 router.get(

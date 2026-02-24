@@ -135,7 +135,7 @@ describe("User Routes", () => {
 	})
 
 	describe("POST /users/tech - Create Tech Account", () => {
-		it("should return 403 when non-admin tries to create tech account", async () => {
+		it("should return 403 when Client tries to create tech account", async () => {
 			const response = await request(app).post("/users/tech").set("Authorization", `Bearer ${mockClientToken}`).send({
 				name: "Técnico Novo",
 				email: "tech@example.com",
@@ -145,6 +145,19 @@ describe("User Routes", () => {
 			})
 			expect(response.status).toBe(403)
 			expect(response.body.message).toContain("admin")
+		})
+
+		it("should return 403 when Tech tries to create tech account", async () => {
+			// Use adminToken as tech for this test (simulate a tech role)
+			const techToken = createMockToken(adminId, "tech")
+			const techResponse = await request(app).post("/users/tech").set("Authorization", `Bearer ${techToken}`).send({
+				name: "Técnico Novo",
+				email: "tech2@example.com",
+				password: "password123",
+				phone: "1234567890",
+				address: "123 Main St",
+			})
+			expect(techResponse.status).toBe(403)
 		})
 
 		it("should return 401 when no token is provided", async () => {
@@ -414,6 +427,22 @@ describe("User Routes", () => {
 			expect(response.body).toHaveProperty("error")
 			expect(response.body.error).toContain("Email already in use")
 		})
+
+		it("it should return 400 when tech updates other tech account", async () => {
+			// mockTech !== techId
+			const techId = "tech-id-123"
+			const response = await request(app)
+				.put(`/users/tech/${techId}`)
+				.set("Authorization", `Bearer ${mockTechToken}`)
+				.send({
+					newName: "Updated",
+					newEmail: "updated@example.com",
+					newPassword: "newpass123",
+					newPhone: "9876543210",
+					newAddress: "456 Updated St",
+				})
+			expect(response.status).toBe(400)
+		})
 	})
 
 	describe("PUT /users/techAvailabilities/:id - Update Tech Availabilities", () => {
@@ -642,7 +671,7 @@ describe("User Routes", () => {
 	})
 
 	describe("POST /users/client - Create Client Account", () => {
-		it("should allow creating client account without authentication", async () => {
+		it("should allow creating client account correctly", async () => {
 			const response = await request(app)
 				.post("/users/client")
 				.send({
@@ -1070,66 +1099,6 @@ describe("User Routes", () => {
 
 			expect(response.status).toBe(400)
 			expect(response.body).toHaveProperty("error")
-		})
-	})
-
-	describe("Authorization and Requisite Compliance", () => {
-		it("should enforce admin-only operations for tech creation", async () => {
-			// Only admin can create tech
-			const clientResponse = await request(app)
-				.post("/users/tech")
-				.set("Authorization", `Bearer ${mockClientToken}`)
-				.send({
-					name: "Técnico Novo",
-					email: "tech@example.com",
-					password: "password123",
-					phone: "1234567890",
-					address: "123 Main St",
-				})
-			expect(clientResponse.status).toBe(403)
-
-			// Use adminToken as tech for this test (simulate a tech role)
-			const techToken = createMockToken(adminId, "tech")
-			const techResponse = await request(app).post("/users/tech").set("Authorization", `Bearer ${techToken}`).send({
-				name: "Técnico Novo",
-				email: "tech2@example.com",
-				password: "password123",
-				phone: "1234567890",
-				address: "123 Main St",
-			})
-			expect(techResponse.status).toBe(403)
-		})
-
-		it("should enforce permission checks for tech account updates", async () => {
-			// Tech can only update their own account
-			const techId = "tech-id-123"
-			const techToken = createMockToken(techId, "tech")
-			const response = await request(app)
-				.put(`/users/tech/${techId}`)
-				.set("Authorization", `Bearer ${techToken}`)
-				.send({
-					newName: "Updated",
-					newEmail: "updated@example.com",
-					newPassword: "newpass123",
-					newPhone: "9876543210",
-					newAddress: "456 Updated St",
-				})
-			// Will succeed if it's their own ID, fail if not
-			expect([200, 403, 400]).toContain(response.status)
-		})
-
-		it("should allow client self-service operations", async () => {
-			// Client can create their own account without auth
-			const response = await request(app)
-				.post("/users/client")
-				.send({
-					name: "New Client",
-					email: `client${Date.now()}@example.com`,
-					password: "password123",
-					phone: "1234567890",
-					address: "123 Main St",
-				})
-			expect([201, 400]).toContain(response.status)
 		})
 	})
 })

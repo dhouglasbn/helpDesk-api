@@ -1,4 +1,4 @@
-// biome-ignore assist/source/organizeImports: <sorted>
+1// biome-ignore assist/source/organizeImports: <sorted>
 import express, { type Express } from "express";
 import jwt from "jsonwebtoken";
 import request from "supertest";
@@ -9,6 +9,7 @@ import { services } from "../src/db/schema/services.ts";
 import bcrypt from "bcrypt";
 import { schema } from "../src/db/schema/index.ts";
 import { users } from "../src/db/schema/users.ts";
+import e from "express";
 
 describe("Service Routes", () => {
 	let app: Express;
@@ -120,7 +121,7 @@ describe("Service Routes", () => {
 			expect(response.status).toBe(401);
 		});
 
-		it("should return 403 when non-admin user tries to create a service", async () => {
+		it("should return 403 when Tech tries to create a service", async () => {
 			const response = await request(app)
 				.post("/services")
 				.set("Authorization", `Bearer ${mockTechToken}`)
@@ -154,6 +155,18 @@ describe("Service Routes", () => {
 				});
 
 			expect(response.status).toBe(400);
+		});
+
+		it("should accept exactly 3 characters in title", async () => {
+			const response = await request(app)
+				.post("/services")
+				.set("Authorization", `Bearer ${mockAdminToken}`)
+				.send({
+					title: "VPN",
+					price: 50.0,
+				});
+
+			expect(response.status).toBe(201);
 		});
 
 		it("should validate price is a non-negative number", async () => {
@@ -255,6 +268,8 @@ describe("Service Routes", () => {
 				.set("Authorization", `Bearer ${mockAdminToken}`);
 
 			expect(response.status).toBe(200);
+			expect(Array.isArray(response.body)).toBe(true);
+			expect(response.body.length).toBeGreaterThan(0);
 		});
 
 		it("should allow authenticated tech to list services", async () => {
@@ -263,6 +278,8 @@ describe("Service Routes", () => {
 				.set("Authorization", `Bearer ${mockTechToken}`);
 
 			expect(response.status).toBe(200);
+			expect(Array.isArray(response.body)).toBe(true);
+			expect(response.body.length).toBeGreaterThan(0);
 		});
 
 		it("should allow authenticated client to list services", async () => {
@@ -271,15 +288,26 @@ describe("Service Routes", () => {
 				.set("Authorization", `Bearer ${mockClientToken}`);
 
 			expect(response.status).toBe(200);
+			expect(Array.isArray(response.body)).toBe(true);
+			expect(response.body.length).toBeGreaterThan(0);
 		});
 
-		it("should return JSON response when listing services", async () => {
+		it("should not list deactivated services in new ticket creation (handled at service level)", async () => {
+			const [createdService] = await db
+				.insert(services)
+				.values({
+					title: `Service to Deactivate ${Date.now()}`,
+					price: "75.0",
+					active: false,
+				})
+				.returning();
 			const response = await request(app)
 				.get("/services/list")
 				.set("Authorization", `Bearer ${mockAdminToken}`);
 
-			// biome-ignore lint/performance/useTopLevelRegex: <template literal>
-			expect(response.headers["content-type"]).toMatch(/json/);
+			expect(response.status).toBe(200);
+			const serviceIds = response.body.map((service: any) => service.id);
+			expect(serviceIds).not.toContain(createdService.id);
 		});
 	});
 
@@ -296,7 +324,7 @@ describe("Service Routes", () => {
 			expect(response.status).toBe(401);
 		});
 
-		it("should return 403 when non-admin user tries to update a service", async () => {
+		it("should return 403 when Tech tries to update a service", async () => {
 			const response = await request(app)
 				.put(`/services/${existingServiceId}`)
 				.set("Authorization", `Bearer ${mockTechToken}`)
@@ -308,7 +336,7 @@ describe("Service Routes", () => {
 			expect(response.status).toBe(403);
 		});
 
-		it("should return 403 when client tries to update a service", async () => {
+		it("should return 403 when Client tries to update a service", async () => {
 			const response = await request(app)
 				.put(`/services/${existingServiceId}`)
 				.set("Authorization", `Bearer ${mockClientToken}`)
@@ -378,38 +406,6 @@ describe("Service Routes", () => {
 			expect(response.status).toBe(400);
 		});
 
-		it("should allow admin to update a service with valid data", async () => {
-			const response = await request(app)
-				.put(`/services/${existingServiceId}`)
-				.set("Authorization", `Bearer ${mockAdminToken}`)
-				.send({
-					title: "Updated Software Installation",
-					price: 150.0,
-				});
-
-			expect(response.status).toBe(200);
-			expect(response.body).toHaveProperty("id");
-			expect(response.body.title).toBe("Updated Software Installation");
-			expect(response.body.price).toBe("150");
-			expect(response.body.active).toBeTruthy();
-		});
-
-		it("should accept decimal prices on update", async () => {
-			const response = await request(app)
-				.put(`/services/${existingServiceId}`)
-				.set("Authorization", `Bearer ${mockAdminToken}`)
-				.send({
-					title: "Updated Hardware Diagnostic",
-					price: 85.75,
-				});
-
-			expect(response.status).toBe(200);
-			expect(response.body).toHaveProperty("id");
-			expect(response.body.title).toBe("Updated Hardware Diagnostic");
-			expect(response.body.price).toBe("85.75");
-			expect(response.body.active).toBeTruthy();
-		});
-
 		it("should update an existing service in the database", async () => {
 			// CREATE own service
 			const [createdService] = await db
@@ -440,6 +436,22 @@ describe("Service Routes", () => {
 			expect(response.body.active).toBeTruthy();
 		});
 
+		it("should accept decimal prices on update", async () => {
+			const response = await request(app)
+				.put(`/services/${existingServiceId}`)
+				.set("Authorization", `Bearer ${mockAdminToken}`)
+				.send({
+					title: "Updated Hardware Diagnostic",
+					price: 85.75,
+				});
+
+			expect(response.status).toBe(200);
+			expect(response.body).toHaveProperty("id");
+			expect(response.body.title).toBe("Updated Hardware Diagnostic");
+			expect(response.body.price).toBe("85.75");
+			expect(response.body.active).toBeTruthy();
+		});
+
 		it("should return error when updating a non-existent service", async () => {
 			const response = await request(app)
 				.put(`/services/${nonExistentUUID}`)
@@ -465,7 +477,7 @@ describe("Service Routes", () => {
 			expect(response.status).toBe(401);
 		});
 
-		it("should return 403 when non-admin user tries to deactivate a service", async () => {
+		it("should return 403 when Tech tries to deactivate a service", async () => {
 			const response = await request(app)
 				.delete(`/services/${existingServiceId}`)
 				.set("Authorization", `Bearer ${mockTechToken}`);
@@ -516,329 +528,6 @@ describe("Service Routes", () => {
 			expect(response.status).toBe(400);
 			expect(response.body).toHaveProperty("error");
 			expect(response.body.error).toBe("Este serviço não existe.");
-		});
-	});
-
-	// ============================================================
-	// Authorization Requirements - Requisites Compliance
-	// ============================================================
-	describe("Authorization Requirements - Requisites Compliance", () => {
-		it("O Admin - should create services", async () => {
-			const response = await request(app)
-				.post("/services")
-				.set("Authorization", `Bearer ${mockAdminToken}`)
-				.send({
-					title: `Installation and Software Update ${Date.now()}`,
-					price: 100.0,
-				});
-
-			expect(response.status).toBe(201);
-			expect(response.body).toHaveProperty("id");
-			expect(response.body.title).toContain(
-				"Installation and Software Update",
-			);
-			expect(response.body.price).toBe("100");
-			expect(response.body.active).toBeTruthy();
-		});
-
-		it("O Admin - should list all services", async () => {
-			const response = await request(app)
-				.get("/services/list")
-				.set("Authorization", `Bearer ${mockAdminToken}`);
-
-			expect(response.status).toBe(200);
-		});
-
-		it("O Admin - should update services", async () => {
-			// CREATE own service
-			const [createdService] = await db
-				.insert(services)
-				.values({
-					title: `Service to Update ${Date.now()}`,
-					price: "100.0",
-					active: true,
-				})
-				.returning();
-
-			// TEST
-			const response = await request(app)
-				.put(`/services/${createdService.id}`)
-				.set("Authorization", `Bearer ${mockAdminToken}`)
-				.send({
-					title: "Updated Installation and Software Update",
-					price: 120.0,
-				});
-
-			expect(response.status).toBe(200);
-			expect(response.body).toHaveProperty("id");
-			expect(response.body.title).toBe("Updated Installation and Software Update");
-			expect(response.body.price).toBe("120");
-			expect(response.body.active).toBeTruthy();
-		});
-
-		it("O Admin - should deactivate services (soft delete)", async () => {
-			// CREATE own service
-			const [createdService] = await db
-				.insert(services)
-				.values({
-					title: `Service to Deactivate ${Date.now()}`,
-					price: "50.0",
-					active: true,
-				})
-				.returning();
-
-			// TEST
-			const response = await request(app)
-				.delete(`/services/${createdService.id}`)
-				.set("Authorization", `Bearer ${mockAdminToken}`);
-
-			expect(response.status).toBe(204);
-		});
-
-		it("O Técnico - should NOT create services", async () => {
-			const response = await request(app)
-				.post("/services")
-				.set("Authorization", `Bearer ${mockTechToken}`)
-				.send({
-					title: "Installation and Software Update",
-					price: 100.0,
-				});
-
-			expect(response.status).toBe(403);
-		});
-
-		it("O Técnico - should NOT update services", async () => {
-			const response = await request(app)
-				.put(`/services/${existingServiceId}`)
-				.set("Authorization", `Bearer ${mockTechToken}`)
-				.send({
-					title: "Updated Installation and Software Update",
-					price: 120.0,
-				});
-
-			expect(response.status).toBe(403);
-		});
-
-		it("O Técnico - should NOT deactivate services", async () => {
-			const response = await request(app)
-				.delete(`/services/${existingServiceId}`)
-				.set("Authorization", `Bearer ${mockTechToken}`);
-
-			expect(response.status).toBe(403);
-		});
-
-		it("O Cliente - should NOT create services", async () => {
-			const response = await request(app)
-				.post("/services")
-				.set("Authorization", `Bearer ${mockClientToken}`)
-				.send({
-					title: "Installation and Software Update",
-					price: 100.0,
-				});
-
-			expect(response.status).toBe(403);
-		});
-
-		it("O Cliente - should NOT update services", async () => {
-			const response = await request(app)
-				.put(`/services/${existingServiceId}`)
-				.set("Authorization", `Bearer ${mockClientToken}`)
-				.send({
-					title: "Updated Installation and Software Update",
-					price: 120.0,
-				});
-
-			expect(response.status).toBe(403);
-		});
-
-		it("O Cliente - should NOT deactivate services", async () => {
-			const response = await request(app)
-				.delete(`/services/${existingServiceId}`)
-				.set("Authorization", `Bearer ${mockClientToken}`);
-
-			expect(response.status).toBe(403);
-		});
-	});
-
-	// ============================================================
-	// Validation - Requisites Compliance
-	// ============================================================
-	describe("Validation - Requisites Compliance", () => {
-		it("should require minimum 3 characters in title", async () => {
-			const response = await request(app)
-				.post("/services")
-				.set("Authorization", `Bearer ${mockAdminToken}`)
-				.send({
-					title: "ab",
-					price: 50.0,
-				});
-
-			expect(response.status).toBe(400);
-		});
-
-		it("should accept exactly 3 characters in title", async () => {
-			const response = await request(app)
-				.post("/services")
-				.set("Authorization", `Bearer ${mockAdminToken}`)
-				.send({
-					title: "VPN",
-					price: 50.0,
-				});
-
-			expect(response.status).toBe(201);
-		});
-
-		it("should reject negative prices", async () => {
-			const response = await request(app)
-				.post("/services")
-				.set("Authorization", `Bearer ${mockAdminToken}`)
-				.send({
-					title: "Software Installation",
-					price: -100,
-				});
-
-			expect(response.status).toBe(400);
-		});
-
-		it("should accept zero as price", async () => {
-			const response = await request(app)
-				.post("/services")
-				.set("Authorization", `Bearer ${mockAdminToken}`)
-				.send({
-					title: "Free Diagnostic",
-					price: 0,
-				});
-
-			expect(response.status).toBe(201);
-		});
-
-		it("should accept large prices", async () => {
-			const response = await request(app)
-				.post("/services")
-				.set("Authorization", `Bearer ${mockAdminToken}`)
-				.send({
-					title: "Complete System Overhaul",
-					price: 9999.99,
-				});
-
-			expect(response.status).toBe(201);
-		});
-	});
-
-	// ============================================================
-	// Service Requisites - Soft Delete Behavior
-	// ============================================================
-	describe("Service Requisites - Soft Delete Behavior", () => {
-		it("should allow deactivation of existing services", async () => {
-			const response = await request(app)
-				.delete(`/services/${existingServiceId}`)
-				.set("Authorization", `Bearer ${mockAdminToken}`);
-
-			expect(response.status).toBe(204);
-		});
-
-		it("should not list deactivated services in new ticket creation (handled at service level)", async () => {
-			// This test verifies the deactivation endpoint is accessible
-			// The actual filtering is handled by the service service layer
-			const response = await request(app)
-				.delete(`/services/${existingServiceId}`)
-				.set("Authorization", `Bearer ${mockAdminToken}`);
-
-			expect(response.status).toBe(204);
-		});
-
-		it("should require authentication for deactivation endpoint", async () => {
-			const response = await request(app).delete(`/services/${existingServiceId}`);
-
-			expect(response.status).toBe(401);
-		});
-	});
-
-	// ============================================================
-	// Multiple Admin Users
-	// ============================================================
-	describe("Multiple Admin Users", () => {
-		it("different admins should be able to create different services", async () => {
-			const adminToken1 = createMockToken("admin-id-001", "admin");
-			const adminToken2 = createMockToken("admin-id-002", "admin");
-
-			const response1 = await request(app)
-				.post("/services")
-				.set("Authorization", `Bearer ${adminToken1}`)
-				.send({
-					title: "Software Installation",
-					price: 100.0,
-				});
-
-			const response2 = await request(app)
-				.post("/services")
-				.set("Authorization", `Bearer ${adminToken2}`)
-				.send({
-					title: "Hardware Installation",
-					price: 150.0,
-				});
-
-			expect(response1.status).toBe(201);
-			expect(response1.body).toHaveProperty("id");
-			expect(response1.body.title).toBe("Software Installation");
-			expect(response1.body.price).toBe("100");
-			expect(response1.body.active).toBeTruthy();
-			expect(response2.status).toBe(201);
-			expect(response2.body).toHaveProperty("id");
-			expect(response2.body.title).toBe("Hardware Installation");
-			expect(response2.body.price).toBe("150");
-			expect(response2.body.active).toBeTruthy();
-		});
-
-		it("different admins should be able to list services", async () => {
-			const adminToken1 = createMockToken("admin-id-001", "admin");
-			const adminToken2 = createMockToken("admin-id-002", "admin");
-
-			const response1 = await request(app)
-				.get("/services/list")
-				.set("Authorization", `Bearer ${adminToken1}`);
-
-			const response2 = await request(app)
-				.get("/services/list")
-				.set("Authorization", `Bearer ${adminToken2}`);
-
-			expect(response1.status).toBe(200);
-			expect(response2.status).toBe(200);
-		});
-	});
-
-	// ============================================================
-	// Authentication
-	// ============================================================
-	describe("Authentication", () => {
-		it("should reject requests without authentication token on POST", async () => {
-			const response = await request(app).post("/services").send({
-				title: "Software Installation",
-				price: 100.0,
-			});
-
-			expect(response.status).toBe(401);
-		});
-
-		it("should reject requests without authentication token on GET", async () => {
-			const response = await request(app).get("/services/list");
-
-			expect(response.status).toBe(401);
-		});
-
-		it("should reject requests without authentication token on PUT", async () => {
-			const response = await request(app).put(`/services/${existingServiceId}`).send({
-				title: "Updated Service",
-				price: 100.0,
-			});
-
-			expect(response.status).toBe(401);
-		});
-
-		it("should reject requests without authentication token on DELETE", async () => {
-			const response = await request(app).delete(`/services/${existingServiceId}`);
-
-			expect(response.status).toBe(401);
 		});
 	});
 });

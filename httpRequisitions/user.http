@@ -1,6 +1,6 @@
 # Variables
 @baseUrl = http://localhost:3333
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhkZmNlYjgwLTE5OWMtNDg4Zi04OTE4LWEwNjA5MTc1Mzk5YyIsImVtYWlsIjoiYWRtaW5pc3RyYWRvckBhZG1pbi5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NzA3Njk2ODIsImV4cCI6MTc3MDc3MzI4Mn0.Xx60XC8OqAXWnTPFyxLohGkXrG6UOjnOLyy5dE49puo
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhkZmNlYjgwLTE5OWMtNDg4Zi04OTE4LWEwNjA5MTc1Mzk5YyIsImVtYWlsIjoiYWRtaW5pc3RyYWRvckBhZG1pbi5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NzA4MjMwMzIsImV4cCI6MTc3MDgyNjYzMn0.bz4iqhLMidxQvFcQD3GGrNMj2VKNex1ZHGLdYlwPAps
 
 @techId = c6e5ce26-e2f5-4f3b-8f7e-611afdb74ebe
 
@@ -47,7 +47,7 @@ Authorization: Bearer {{token}}
 ###
 # list Client Accounts
 # @name listClientAccounts
-kGET {{baseUrl}}/users/clientList
+GET {{baseUrl}}/users/clientList
 Authorization: Bearer {{token}}
 
 ###

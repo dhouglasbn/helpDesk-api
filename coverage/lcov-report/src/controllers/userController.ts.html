@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">94.54% </span>
+                <span class="strong">94.64% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>104/110</span>
+                <span class='fraction'>106/112</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">94.54% </span>
+                <span class="strong">94.64% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>104/110</span>
+                <span class='fraction'>106/112</span>
             </div>
         
             
@@ -309,7 +309,9 @@
 <a name='L244'></a><a href='#L244'>244</a>
 <a name='L245'></a><a href='#L245'>245</a>
 <a name='L246'></a><a href='#L246'>246</a>
-<a name='L247'></a><a href='#L247'>247</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L247'></a><a href='#L247'>247</a>
+<a name='L248'></a><a href='#L248'>248</a>
+<a name='L249'></a><a href='#L249'>249</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -336,8 +338,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -359,16 +361,17 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -454,6 +457,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
@@ -607,13 +611,14 @@ export default class UserController {
 	createClientAccount = async (request: OurRequest, reply: Response) =&gt; {
 		const { name, email, password, phone, address } = request.body
 		try {
-			const newClient = await this.userService.createClientAccount({
+			const result = await this.userService.createClientAccount({
 				name,
 				email,
 				password,
 				phone,
 				address,
 			})
+			const newClient = result[0]
 			return reply.status(201).json({ newClient })
 		} catch (error) {
 			return reply.status(400).json({ error: (error as Error).message })
@@ -692,7 +697,7 @@ export default class UserController {
 		try {
 			const updatingUserId = request.params.id
 			const { newName, newEmail, newPassword, newPhone, newAddress } = request.body
-			const newTech = await this.userService.updateTechAccount({
+			const result = await this.userService.updateTechAccount({
 				updatingUserId,
 				newName,
 				newEmail,
@@ -700,6 +705,7 @@ export default class UserController {
 				newPhone,
 				newAddress,
 			})
+			const newTech = result[0]
 			return reply.status(200).json({ newTech })
 		} catch (error) {
 			return reply.status(400).json({ error: (error as Error).message })
@@ -808,7 +814,7 @@ export default class UserController {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-02-04T03:13:22.432Z
+                at 2026-02-24T02:55:40.242Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

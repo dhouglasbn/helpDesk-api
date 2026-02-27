@@ -29,6 +29,6 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "email": "cliente1@gmail.com",
-  "password": "password"
+  "email": "teste.video3@gmail.com",
+  "password": "senhaTeste"
 }

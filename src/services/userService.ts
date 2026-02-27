@@ -249,6 +249,25 @@ export default class UserService {
 		return user.picture
 	}
 
+	getMyAccount = async (userId: string) => {
+		try {
+			const user = await db.query.users.findFirst({
+				where: eq(schema.users.id, userId),
+			})
+
+			if (user?.role === "tech") {
+				const availabilities = await db.query.techniciansAvailabilities.findMany({
+					where: eq(schema.techniciansAvailabilities.userId, userId),
+				})
+				return { ...user, availabilities: availabilities.map((a) => a.time) }
+			}
+
+			return user
+		} catch (_error) {
+			throw new Error("User not found")
+		}
+	}
+
 	deleteClienteAccount = async (clientId: string) => {
 		const clientExists = await db.query.users.findFirst({
 			where: eq(schema.users.id, clientId),

@@ -6,7 +6,7 @@ A comprehensive Jest test suite for all user routes in the helpdesk API, ensurin
 
 ## Test Coverage
 
-### 64 Total Tests covering:
+### 69 Total Tests covering:
 
 #### 1. **POST /users/login** (4 tests)
 
@@ -23,6 +23,14 @@ A comprehensive Jest test suite for all user routes in the helpdesk API, ensurin
 - Any invalid field returns error 400
 - Admin creates tech account
 - Admin cannot create tech account with existent email
+
+#### 2. **GET /users/me** - Get My Account (5 tests)
+
+- Token validation (401 when missing)
+- User is authenticated but has no id
+- User is authenticated but id is inexistent
+- Returns Client info
+- Tech info comes with avialabilities
 
 #### 3. **GET /users/techList** - List Tech Accounts (3 tests)
 
@@ -168,10 +176,10 @@ npm test -- --coverage
 
 ## Test Results
 
-**All 64 tests passing ✅**
+**All 69 tests passing ✅**
 
 ```
 Test Suites: 1 passed, 1 total
-Tests:       64 passed, 64 total
-Time:        ~10 seconds
+Tests:       69 passed, 69 total
+Time:        ~12 seconds
 ```

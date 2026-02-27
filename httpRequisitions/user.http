@@ -1,6 +1,6 @@
 # Variables
 @baseUrl = http://localhost:3333
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhkZmNlYjgwLTE5OWMtNDg4Zi04OTE4LWEwNjA5MTc1Mzk5YyIsImVtYWlsIjoiYWRtaW5pc3RyYWRvckBhZG1pbi5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NzA4MjMwMzIsImV4cCI6MTc3MDgyNjYzMn0.bz4iqhLMidxQvFcQD3GGrNMj2VKNex1ZHGLdYlwPAps
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU1NGU1ZjJhLTcyMGUtNGU1MS05MGNkLTc4NGNmYTJmMWUwNSIsImVtYWlsIjoidGVzdGUudmlkZW8zQGdtYWlsLmNvbSIsInJvbGUiOiJjbGllbnQiLCJpYXQiOjE3NzIyMTYzODMsImV4cCI6MTc3MjIxOTk4M30.tnaxEjBjRvMwAoorZvUZl7LrTs00v-ThNP3F36MRLwA
 
 @techId = c6e5ce26-e2f5-4f3b-8f7e-611afdb74ebe
 
@@ -14,9 +14,9 @@ Accept: application/json
 Authorization: Bearer {{token}}
 
 {
-  "name": "Tech test 4",
-  "email": "techtest4@tech.com",
-  "password": "tempPassword",
+  "name": "teste vide",
+  "email": "teste.video@client.com",
+  "password": "senhaTeste",
   "phone": "11999999999",
   "address": "Rua teste, 123"
 }
@@ -30,12 +30,19 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "name": "cliente 4",
-  "email": "cliente4@gmail.com",
-  "password": "password",
+  "name": "teste video 3",
+  "email": "teste.video3@gmail.com",
+  "password": "senhaTeste",
   "phone": "11999999999",
   "address": "Rua teste, 123"
-}
+} 
+
+###
+
+# get My Account
+# @name getMyAccount
+GET {{baseUrl}}/users/me
+Authorization: Bearer {{token}}
 
 ###
 

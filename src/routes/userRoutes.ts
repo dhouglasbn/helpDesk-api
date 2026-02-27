@@ -97,6 +97,7 @@ router.post(
 	),
 	userController.createClientAccount,
 )
+router.get("/me", authMiddleware, userController.getMyAccount)
 router.put(
 	"/client/:id",
 	validateZodSchema(

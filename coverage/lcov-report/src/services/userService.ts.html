@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">98.85% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>78/78</span>
+                <span class='fraction'>86/87</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>40/40</span>
+                <span class='fraction'>42/42</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">93.33% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>13/13</span>
+                <span class='fraction'>14/15</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>76/76</span>
+                <span class='fraction'>84/84</span>
             </div>
         
             
@@ -325,7 +325,26 @@
 <a name='L260'></a><a href='#L260'>260</a>
 <a name='L261'></a><a href='#L261'>261</a>
 <a name='L262'></a><a href='#L262'>262</a>
-<a name='L263'></a><a href='#L263'>263</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L263'></a><a href='#L263'>263</a>
+<a name='L264'></a><a href='#L264'>264</a>
+<a name='L265'></a><a href='#L265'>265</a>
+<a name='L266'></a><a href='#L266'>266</a>
+<a name='L267'></a><a href='#L267'>267</a>
+<a name='L268'></a><a href='#L268'>268</a>
+<a name='L269'></a><a href='#L269'>269</a>
+<a name='L270'></a><a href='#L270'>270</a>
+<a name='L271'></a><a href='#L271'>271</a>
+<a name='L272'></a><a href='#L272'>272</a>
+<a name='L273'></a><a href='#L273'>273</a>
+<a name='L274'></a><a href='#L274'>274</a>
+<a name='L275'></a><a href='#L275'>275</a>
+<a name='L276'></a><a href='#L276'>276</a>
+<a name='L277'></a><a href='#L277'>277</a>
+<a name='L278'></a><a href='#L278'>278</a>
+<a name='L279'></a><a href='#L279'>279</a>
+<a name='L280'></a><a href='#L280'>280</a>
+<a name='L281'></a><a href='#L281'>281</a>
+<a name='L282'></a><a href='#L282'>282</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -574,6 +593,25 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -838,6 +876,25 @@ export default class UserService {
 		return user.picture
 	}
 &nbsp;
+	getMyAccount = async (userId: string) =&gt; {
+		try {
+			const user = await db.query.users.findFirst({
+				where: eq(schema.users.id, userId),
+			})
+&nbsp;
+			if (user?.role === "tech") {
+				const availabilities = await db.query.techniciansAvailabilities.findMany({
+					where: eq(schema.techniciansAvailabilities.userId, userId),
+				})
+				return { ...user, availabilities: availabilities.map(<span class="fstat-no" title="function not covered" >(a</span>) =&gt; <span class="cstat-no" title="statement not covered" >a.time)</span> }
+			}
+&nbsp;
+			return user
+		} catch (_error) {
+			throw new Error("User not found")
+		}
+	}
+&nbsp;
 	deleteClienteAccount = async (clientId: string) =&gt; {
 		const clientExists = await db.query.users.findFirst({
 			where: eq(schema.users.id, clientId),
@@ -856,7 +913,7 @@ export default class UserService {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-02-24T02:55:40.242Z
+                at 2026-02-27T18:56:41.247Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

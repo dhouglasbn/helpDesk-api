@@ -121,6 +121,18 @@ export default class UserController {
 		}
 	}
 
+	getMyAccount = async (request: OurRequest, reply: Response) => {
+		try {
+			if (!request.user?.id) {
+				return reply.status(400).json({ message: "ID do usuário não encontrado no token." })
+			}
+			const myAccount = await this.userService.getMyAccount(request.user.id)
+			return reply.status(200).json({ myAccount })
+		} catch (error) {
+			return reply.status(400).json({ error: (error as Error).message })
+		}
+	}
+
 	updateTechAccount = async (request: OurRequest, reply: Response) => {
 		const isUserAuthorized = request.user?.role && (request.user.role === "tech" || request.user.role === "admin")
 		if (!isUserAuthorized) {

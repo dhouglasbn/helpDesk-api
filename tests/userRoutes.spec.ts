@@ -38,7 +38,7 @@ describe("User Routes", () => {
 					passwordHash: hashed,
 					role: "client",
 					phone: "1234567890",
-					address: "123 Test St",
+					address: "123 Main St",
 				})
 				.returning()
 			mockClientId = createdUser.id
@@ -215,6 +215,55 @@ describe("User Routes", () => {
 			expect(response.status).toBe(400)
 			expect(response.body).toHaveProperty("error")
 			expect(response.body.error).toContain("Email already in use")
+		})
+	})
+
+	describe("GET /users/me - Get Authenticated User Info", () => {
+		it("should return 401 when no token is provided", async () => {
+			const response = await request(app).get("/users/me")
+			expect(response.status).toBe(401)
+		})
+
+		it("should return 400 when no id is found in token", async () => {
+			const mockInvalidToken = createMockToken("", "client")
+			const response = await request(app).get("/users/me").set("Authorization", `Bearer ${mockInvalidToken}`)
+			expect(response.status).toBe(400)
+		})
+
+		it("should return 400 when no id found in token is inexistent", async () => {
+			const mockInexistentUserToken = createMockToken("inexistent-user", "client")
+			const response = await request(app).get("/users/me").set("Authorization", `Bearer ${mockInexistentUserToken}`)
+			expect(response.status).toBe(400)
+			expect(response.body).toHaveProperty("error", "User not found")
+		})
+
+		it("should return client info when authenticated", async () => {
+			const response = await request(app).get("/users/me").set("Authorization", `Bearer ${mockClientToken}`)
+			expect(response.status).toBe(200)
+			expect(response.body).toHaveProperty("myAccount")
+			expect(response.body.myAccount.id).toBe(mockClientId)
+			expect(response.body.myAccount.name).toBe("Test User")
+			expect(response.body.myAccount.email).toBe(mockClientEmail)
+			expect(response.body.myAccount).toHaveProperty("passwordHash")
+			expect(response.body.myAccount.phone).toBe("1234567890")
+			expect(response.body.myAccount.address).toBe("123 Main St")
+			expect(response.body.myAccount.role).toBe("client")
+			expect(response.body.myAccount.picture).toBe("teste.png")
+		})
+
+		it("should return tech info when authenticated", async () => {
+			const response = await request(app).get("/users/me").set("Authorization", `Bearer ${mockTechToken}`)
+			expect(response.status).toBe(200)
+			expect(response.body).toHaveProperty("myAccount")
+			expect(response.body.myAccount.id).toBe(mockTechId)
+			expect(response.body.myAccount.name).toBe("Tech User")
+			expect(response.body.myAccount.email).toBe("techmock@example.com")
+			expect(response.body.myAccount).toHaveProperty("passwordHash")
+			expect(response.body.myAccount.phone).toBe("1234567890")
+			expect(response.body.myAccount.address).toBe("123 Main St")
+			expect(response.body.myAccount.role).toBe("tech")
+			expect(response.body.myAccount.picture).toBe("teste.png")
+			expect(response.body.myAccount.availabilities).toEqual([])
 		})
 	})
 
@@ -844,7 +893,7 @@ describe("User Routes", () => {
 					picture: "teste.png",
 					passwordHash: hashed,
 					phone: "1234567890",
-					address: "123 Test St",
+					address: "123 Main St",
 					role: "client",
 				})
 				.returning()

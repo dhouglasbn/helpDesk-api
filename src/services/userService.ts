@@ -251,9 +251,18 @@ export default class UserService {
 
 	getMyAccount = async (userId: string) => {
 		try {
-			const user = await db.query.users.findFirst({
+			const result = await db.query.users.findFirst({
 				where: eq(schema.users.id, userId),
 			})
+
+			const user = {
+				id: result?.id,
+				name: result?.name,
+				email: result?.email,
+				phone: result?.phone,
+				address: result?.address,
+				role: result?.role,
+			}
 
 			if (user?.role === "tech") {
 				const availabilities = await db.query.techniciansAvailabilities.findMany({

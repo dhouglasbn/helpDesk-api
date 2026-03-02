@@ -244,11 +244,9 @@ describe("User Routes", () => {
 			expect(response.body.myAccount.id).toBe(mockClientId)
 			expect(response.body.myAccount.name).toBe("Test User")
 			expect(response.body.myAccount.email).toBe(mockClientEmail)
-			expect(response.body.myAccount).toHaveProperty("passwordHash")
 			expect(response.body.myAccount.phone).toBe("1234567890")
 			expect(response.body.myAccount.address).toBe("123 Main St")
 			expect(response.body.myAccount.role).toBe("client")
-			expect(response.body.myAccount.picture).toBe("teste.png")
 		})
 
 		it("should return tech info when authenticated", async () => {
@@ -258,11 +256,9 @@ describe("User Routes", () => {
 			expect(response.body.myAccount.id).toBe(mockTechId)
 			expect(response.body.myAccount.name).toBe("Tech User")
 			expect(response.body.myAccount.email).toBe("techmock@example.com")
-			expect(response.body.myAccount).toHaveProperty("passwordHash")
 			expect(response.body.myAccount.phone).toBe("1234567890")
 			expect(response.body.myAccount.address).toBe("123 Main St")
 			expect(response.body.myAccount.role).toBe("tech")
-			expect(response.body.myAccount.picture).toBe("teste.png")
 			expect(response.body.myAccount.availabilities).toEqual([])
 		})
 	})

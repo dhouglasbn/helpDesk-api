@@ -20,9 +20,11 @@
  *               title:
  *                 type: string
  *                 minLength: 3
+ *                 example: "Suporte Técnico Postman"
  *               price:
  *                 type: number
  *                 minimum: 0
+ *                 example: 199.99
  *     responses:
  *       201:
  *         description: Serviço criado com sucesso
@@ -59,6 +61,7 @@
  *       - name: id
  *         in: path
  *         required: true
+ *         example: 4878508a-2fd4-4005-8418-83fce08c0e50
  *         schema:
  *           type: string
  *           format: uuid
@@ -74,8 +77,10 @@
  *             properties:
  *               title:
  *                 type: string
+ *                 example: Instalação e atualização de softwares
  *               price:
  *                 type: number
+ *                 example: 100.0
  *     responses:
  *       200:
  *         description: Serviço atualizado

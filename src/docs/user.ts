@@ -18,11 +18,21 @@
  *               email:
  *                 type: string
  *                 format: email
+ *                 example: tecnico1@tech.com
  *               password:
  *                 type: string
+ *                 example: hashed-password
  *     responses:
  *       200:
  *         description: Login realizado
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 token:
+ *                   type: string
+ *                   example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
  *       400:
  *         description: Credenciais inválidas
  */
@@ -46,14 +56,25 @@
  *               - name
  *               - email
  *               - password
+ *               - phone
+ *               - address
  *             properties:
  *               name:
  *                 type: string
+ *                 example: Técnico 4
  *               email:
  *                 type: string
  *                 format: email
+ *                 example: tecnico4@tech.com
  *               password:
  *                 type: string
+ *                 example: hashed-password
+ *               phone:
+ *                 type: string
+ *                 example: "11999999999"
+ *               address:
+ *                 type: string
+ *                 example: Rua Exemplo, 123
  *     responses:
  *       201:
  *         description: Técnico criado
@@ -87,10 +108,11 @@
  *     parameters:
  *       - in: path
  *         name: id
+ *         required: true
  *         schema:
  *           type: string
  *           format: uuid
- *         required: true
+ *         example: a290e17b-d0a3-4b36-b3dd-75a3e810be7b
  *     requestBody:
  *       required: true
  *       content:
@@ -101,14 +123,25 @@
  *               - newName
  *               - newEmail
  *               - newPassword
+ *               - newPhone
+ *               - newAddress
  *             properties:
  *               newName:
  *                 type: string
+ *                 example: Técnico 33
  *               newEmail:
  *                 type: string
  *                 format: email
+ *                 example: tecnico3@tech.com
  *               newPassword:
  *                 type: string
+ *                 example: hashed-password
+ *               newPhone:
+ *                 type: string
+ *                 example: "22999999999"
+ *               newAddress:
+ *                 type: string
+ *                 example: Rua Exemplo, 321
  *     responses:
  *       200:
  *         description: Técnico atualizado
@@ -128,10 +161,11 @@
  *     parameters:
  *       - in: path
  *         name: id
+ *         required: true
  *         schema:
  *           type: string
  *           format: uuid
- *         required: true
+ *         example: a290e17b-d0a3-4b36-b3dd-75a3e810be7b
  *     requestBody:
  *       required: true
  *       content:
@@ -145,7 +179,7 @@
  *                 type: array
  *                 items:
  *                   type: string
- *                   example: "14:00"
+ *                 example: ["14:00", "15:00"]
  *     responses:
  *       200:
  *         description: Horários atualizados
@@ -163,10 +197,11 @@
  *     parameters:
  *       - name: id
  *         in: path
+ *         required: true
  *         schema:
  *           type: string
  *           format: uuid
- *         required: true
+ *         example: 8dfceb80-199c-488f-8918-a0609175399c
  *     requestBody:
  *       required: true
  *       content:
@@ -177,6 +212,25 @@
  *               - newName
  *               - newEmail
  *               - newPassword
+ *               - newPhone
+ *               - newAddress
+ *             properties:
+ *               newName:
+ *                 type: string
+ *                 example: Administrador Postman
+ *               newEmail:
+ *                 type: string
+ *                 format: email
+ *                 example: administrador@admin.com
+ *               newPassword:
+ *                 type: string
+ *                 example: hashed-password
+ *               newPhone:
+ *                 type: string
+ *                 example: "22999999999"
+ *               newAddress:
+ *                 type: string
+ *                 example: Rua Exemplo, 321
  *     responses:
  *       200:
  *         description: Admin atualizado
@@ -199,6 +253,25 @@
  *               - name
  *               - email
  *               - password
+ *               - phone
+ *               - address
+ *             properties:
+ *               name:
+ *                 type: string
+ *                 example: Cliente Postman
+ *               email:
+ *                 type: string
+ *                 format: email
+ *                 example: cliente@postman.com
+ *               password:
+ *                 type: string
+ *                 example: hashed-password
+ *               phone:
+ *                 type: string
+ *                 example: "11999999999"
+ *               address:
+ *                 type: string
+ *                 example: Rua Exemplo, 123
  *     responses:
  *       201:
  *         description: Cliente criado
@@ -216,10 +289,10 @@
  *     parameters:
  *       - name: id
  *         in: path
+ *         required: true
  *         schema:
  *           type: string
  *           format: uuid
- *         required: true
  *     requestBody:
  *       required: true
  *       content:
@@ -230,6 +303,25 @@
  *               - newName
  *               - newEmail
  *               - newPassword
+ *               - newPhone
+ *               - newAddress
+ *             properties:
+ *               newName:
+ *                 type: string
+ *                 example: Cliente Postman Atualizado
+ *               newEmail:
+ *                 type: string
+ *                 format: email
+ *                 example: cliente@postman.com
+ *               newPassword:
+ *                 type: string
+ *                 example: hashed-password
+ *               newPhone:
+ *                 type: string
+ *                 example: "22999999999"
+ *               newAddress:
+ *                 type: string
+ *                 example: Rua Exemplo, 321
  *     responses:
  *       200:
  *         description: Cliente atualizado
@@ -247,10 +339,10 @@
  *     parameters:
  *       - name: id
  *         in: path
+ *         required: true
  *         schema:
  *           type: string
  *           format: uuid
- *         required: true
  *     responses:
  *       204:
  *         description: Conta removida

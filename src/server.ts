@@ -18,6 +18,10 @@ app.use(
 	swaggerUiMiddleware.setup(swaggerSpec),
 );
 
+app.get("/docs-json", (req, res) => {
+  res.json(swaggerSpec);
+});
+
 app.use("/users", userRoutes);
 app.use("/services", serviceRoutes);
 app.use("/tickets", ticketRoutes);

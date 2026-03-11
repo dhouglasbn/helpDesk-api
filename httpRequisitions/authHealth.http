@@ -29,6 +29,6 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "email": "tecnico1@tech.com",
-  "password": "hashed-password"
+  "email": "teste.video3@gmail.com",
+  "password": "senhaTeste"
 }

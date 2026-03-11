@@ -74,7 +74,8 @@ export default class TicketService {
 				services: sql`json_agg(json_build_object(
         'id', ${schema.services.id},
         'title', ${schema.services.title},
-        'price', ${schema.services.price}::text
+        'price', ${schema.services.price}::text,
+				'active', ${schema.services.active}
       ))`,
 				totalPrice: sql`SUM(${schema.services.price}::numeric)`,
 			})

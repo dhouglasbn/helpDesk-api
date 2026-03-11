@@ -16,7 +16,6 @@ let realAdminId = ""
 let realTechId1 = ""
 let realTechId2 = ""
 let realClientId = ""
-let realClientId2 = ""
 let realServiceId1 = ""
 let realServiceId2 = ""
 let realTicketId = ""
@@ -31,9 +30,7 @@ let mockAdminToken = ""
 let mockTechToken = ""
 let mockTech2Token = ""
 let mockClientToken = ""
-let mockClient2Token = ""
-const nonExistentUUID = "550e8400-e29b-41d4-a716-446655440000";
-
+const nonExistentUUID = "550e8400-e29b-41d4-a716-446655440000"
 
 describe("Ticket Routes", () => {
 	beforeAll(async () => {
@@ -112,20 +109,6 @@ describe("Ticket Routes", () => {
 				.returning()
 			realClientId = createdClient.id
 
-			const hashedClient2 = bcrypt.hashSync("password123", 8)
-			const [createdClient2] = await db
-				.insert(schema.users)
-				.values({
-					name: "Client User 2",
-					email: `client2.${Date.now()}@test.com`,
-					passwordHash: hashedClient2,
-					phone: "1234567890",
-					address: "123 Main St",
-					role: "client",
-				})
-				.returning()
-			realClientId2 = createdClient2.id
-
 			const [createdService1] = await db
 				.insert(schema.services)
 				.values({
@@ -166,7 +149,6 @@ describe("Ticket Routes", () => {
 			mockTechToken = createMockToken(realTechId1, "tech")
 			mockTech2Token = createMockToken(realTechId2, "tech")
 			mockClientToken = createMockToken(realClientId, "client")
-			mockClient2Token = createMockToken(realClientId2, "client")
 		} catch (error) {
 			console.error("Failed to create test fixtures:", error)
 			throw error

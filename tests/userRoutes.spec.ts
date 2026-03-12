@@ -1130,7 +1130,9 @@ describe("User Routes", () => {
 			const response = await request(app).get(`/users/picture/${mockClientId}`)
 
 			expect(response.status).toBe(200)
-			expect(response.body).toHaveProperty("userPicture")
+			// biome-ignore lint/performance/useTopLevelRegex: <iwantregex>
+			expect(response.headers["content-type"]).toMatch(/image/)
+			expect(response.body).toBeInstanceOf(Buffer)
 		})
 
 		it("should return 400 when user id does not exist", async () => {

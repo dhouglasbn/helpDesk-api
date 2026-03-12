@@ -64,13 +64,7 @@ export default class UserController {
 		}
 	}
 
-	listTechAccounts = async (request: OurRequest, reply: Response) => {
-		if (!request.user?.role || request.user.role !== "admin") {
-			return reply.status(403).json({
-				message: "Acesso negado: Somente o admin pode listar contas de técnicos.",
-			})
-		}
-
+	listTechAccounts = async (_request: OurRequest, reply: Response) => {
 		try {
 			const techList = await this.userService.listTechAccounts()
 			return reply.status(200).json({ techList })
@@ -114,8 +108,15 @@ export default class UserController {
 
 	getUserPicture = async (request: OurRequest, reply: Response) => {
 		try {
-			const userPicture = await this.userService.getUserPicture(request.params.id)
-			return reply.status(200).json({ userPicture })
+			const base64 = await this.userService.getUserPicture(request.params.id)
+
+			if (!base64) {
+				return reply.status(404).send({ error: "Imagem não encontrada" })
+			}
+
+			const imageBuffer = Buffer.from(base64, "base64")
+
+			return reply.type("image/jpeg").send(imageBuffer)
 		} catch (error) {
 			return reply.status(400).json({ error: (error as Error).message })
 		}

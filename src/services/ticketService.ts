@@ -67,7 +67,14 @@ export default class TicketService {
 			.select({
 				id: schema.tickets.id,
 				clientId: schema.tickets.clientId,
-				techId: schema.tickets.techId,
+				tech: sql`json_build_object(
+					'id', ${schema.users.id},
+					'name', ${schema.users.name},
+					'email', ${schema.users.email},
+					'phone', ${schema.users.phone},
+					'address', ${schema.users.address},
+					'picturePath', '/users/picture/' || ${schema.users.id}
+				)`,
 				status: schema.tickets.status,
 				createdAt: schema.tickets.createdAt,
 				updatedAt: schema.tickets.updatedAt,
@@ -80,10 +87,11 @@ export default class TicketService {
 				totalPrice: sql`SUM(${schema.services.price}::numeric)`,
 			})
 			.from(schema.tickets)
+			.leftJoin(schema.users, eq(schema.users.id, schema.tickets.techId))
 			.leftJoin(schema.ticketServices, eq(schema.ticketServices.ticketId, schema.tickets.id))
 			.leftJoin(schema.services, eq(schema.services.id, schema.ticketServices.serviceId))
 			.where(eq(schema.tickets.clientId, clientId))
-			.groupBy(schema.tickets.id)
+			.groupBy(schema.tickets.id, schema.users.id)
 			.orderBy(desc(schema.tickets.createdAt))
 
 	listTechTickets = async (techId: string) =>

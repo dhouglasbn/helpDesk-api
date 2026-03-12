@@ -140,7 +140,7 @@ describe("User Routes", () => {
 				name: "Técnico Novo",
 				email: "tech@example.com",
 				password: "password123",
-				phone: "1234567890",
+				phone: "12345678900",
 				address: "123 Main St",
 			})
 			expect(response.status).toBe(403)
@@ -154,7 +154,7 @@ describe("User Routes", () => {
 				name: "Técnico Novo",
 				email: "tech2@example.com",
 				password: "password123",
-				phone: "1234567890",
+				phone: "12345678900",
 				address: "123 Main St",
 			})
 			expect(techResponse.status).toBe(403)
@@ -165,7 +165,7 @@ describe("User Routes", () => {
 				name: "Técnico Novo",
 				email: "tech@example.com",
 				password: "password123",
-				phone: "1234567890",
+				phone: "12345678900",
 				address: "123 Main St",
 			})
 			expect(response.status).toBe(401)
@@ -188,7 +188,7 @@ describe("User Routes", () => {
 				name: "João Silva - Técnico",
 				email: techEmail,
 				password: "TechPassword123!",
-				phone: "1234567890",
+				phone: "12345678900",
 				address: "123 Main St",
 			})
 
@@ -208,7 +208,7 @@ describe("User Routes", () => {
 				name: "Técnico Dois",
 				email: mockClientEmail, // Same email as first request
 				password: "AnotherPassword123!",
-				phone: "1234567890",
+				phone: "12345678900",
 				address: "123 Main St",
 			})
 
@@ -247,6 +247,7 @@ describe("User Routes", () => {
 			expect(response.body.myAccount.phone).toBe("1234567890")
 			expect(response.body.myAccount.address).toBe("123 Main St")
 			expect(response.body.myAccount.role).toBe("client")
+			expect(response.body.myAccount.picturePath).toBe(`/users/picture/${mockClientId}`)
 		})
 
 		it("should return tech info when authenticated", async () => {
@@ -264,12 +265,6 @@ describe("User Routes", () => {
 	})
 
 	describe("GET /users/techList - List Tech Accounts", () => {
-		it("should return 403 when non-admin tries to list tech accounts", async () => {
-			const response = await request(app).get("/users/techList").set("Authorization", `Bearer ${mockClientToken}`)
-			expect(response.status).toBe(403)
-			expect(response.body.message).toContain("admin")
-		})
-
 		it("should return 401 when no token is provided", async () => {
 			const response = await request(app).get("/users/techList")
 			expect(response.status).toBe(401)
@@ -723,7 +718,7 @@ describe("User Routes", () => {
 					name: "Cliente Novo",
 					email: `client${Date.now()}@example.com`,
 					password: "password123",
-					phone: "9876543210",
+					phone: "98765432100",
 					address: "456 Updated St",
 				})
 

@@ -71,11 +71,11 @@ export default class UserService {
 				id: schema.users.id,
 				name: schema.users.name,
 				email: schema.users.email,
-				passwordHash: schema.users.passwordHash,
 				phone: schema.users.phone,
 				address: schema.users.address,
 				role: schema.users.role,
 				availabilities: sql`array_agg(${schema.techniciansAvailabilities.time} ORDER BY ${schema.techniciansAvailabilities.time})`,
+				picturePath: sql`'/users/picture/' || ${schema.users.id}`,
 			})
 			.from(schema.users)
 			.leftJoin(schema.techniciansAvailabilities, eq(schema.techniciansAvailabilities.userId, schema.users.id))
@@ -262,6 +262,7 @@ export default class UserService {
 				phone: result?.phone,
 				address: result?.address,
 				role: result?.role,
+				picturePath: result && `/users/picture/${result.id}`,
 			}
 
 			if (user?.role === "tech") {

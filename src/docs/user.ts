@@ -88,7 +88,7 @@
  *   get:
  *     tags:
  *       - Users
- *     summary: Lista contas de técnicos (ADMIN)
+ *     summary: Lista contas de técnicos
  *     security:
  *       - bearerAuth: []
  *     responses:

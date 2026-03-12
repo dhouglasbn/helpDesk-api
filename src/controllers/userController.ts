@@ -100,7 +100,7 @@ export default class UserController {
 				const accessURL = await this.userService.updateUserPicture(request.params.id, profilePicBase64)
 				return reply.status(200).json({ accessURL })
 			}
-			return reply.status(400).json({ message: "Nenhum arquivo enviado." })
+			return reply.status(400).json({ message: "Erro ao atualizar foto: Nenhum arquivo enviado." })
 		} catch (error) {
 			return reply.status(400).json({ error: (error as Error).message })
 		}

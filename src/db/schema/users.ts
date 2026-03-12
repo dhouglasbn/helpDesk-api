@@ -1,4 +1,4 @@
-import { pgEnum, pgTable, uuid, varchar } from "drizzle-orm/pg-core"
+import { pgEnum, pgTable, timestamp, uuid, varchar } from "drizzle-orm/pg-core"
 import { techniciansAvailabilities } from "./techAvailabilities.ts"
 import { relations } from "drizzle-orm"
 
@@ -13,6 +13,8 @@ export const users = pgTable("users", {
 	address: varchar("address").notNull(),
 	role: userRoleEnum("role").notNull(),
 	picture: varchar("picture"),
+	createdAt: timestamp("created_at").notNull().defaultNow(),
+	updatedAt: timestamp("updated_at").notNull().defaultNow(),
 })
 
 export const userRelations = relations(users, ({ many }) => ({

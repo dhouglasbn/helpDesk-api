@@ -37,7 +37,7 @@ describe("User Routes", () => {
 					picture: "teste.png",
 					passwordHash: hashed,
 					role: "client",
-					phone: "1234567890",
+					phone: "12345678900",
 					address: "123 Main St",
 				})
 				.returning()
@@ -52,7 +52,7 @@ describe("User Routes", () => {
 					email: "techmock@example.com",
 					picture: "teste.png",
 					passwordHash: hashedTech,
-					phone: "1234567890",
+					phone: "12345678900",
 					address: "123 Main St",
 					role: "tech",
 				})
@@ -68,7 +68,7 @@ describe("User Routes", () => {
 					email: "adminmock@example.com",
 					picture: "teste.png",
 					passwordHash: hashedAdmin,
-					phone: "1234567890",
+					phone: "12345678900",
 					address: "123 Main St",
 					role: "admin",
 				})
@@ -176,7 +176,7 @@ describe("User Routes", () => {
 				name: "ab", // too short
 				email: "invalid-email",
 				password: "short", // too short
-				phone: "1234567890",
+				phone: "12345678900",
 				address: "123 Main St",
 			})
 			expect(response.status).toBe(400)
@@ -244,10 +244,12 @@ describe("User Routes", () => {
 			expect(response.body.myAccount.id).toBe(mockClientId)
 			expect(response.body.myAccount.name).toBe("Test User")
 			expect(response.body.myAccount.email).toBe(mockClientEmail)
-			expect(response.body.myAccount.phone).toBe("1234567890")
+			expect(response.body.myAccount.phone).toBe("12345678900")
 			expect(response.body.myAccount.address).toBe("123 Main St")
 			expect(response.body.myAccount.role).toBe("client")
 			expect(response.body.myAccount.picturePath).toBe(`/users/picture/${mockClientId}`)
+			expect(response.body.myAccount).toHaveProperty("createdAt")
+			expect(response.body.myAccount).toHaveProperty("updatedAt")
 		})
 
 		it("should return tech info when authenticated", async () => {
@@ -257,7 +259,7 @@ describe("User Routes", () => {
 			expect(response.body.myAccount.id).toBe(mockTechId)
 			expect(response.body.myAccount.name).toBe("Tech User")
 			expect(response.body.myAccount.email).toBe("techmock@example.com")
-			expect(response.body.myAccount.phone).toBe("1234567890")
+			expect(response.body.myAccount.phone).toBe("12345678900")
 			expect(response.body.myAccount.address).toBe("123 Main St")
 			expect(response.body.myAccount.role).toBe("tech")
 			expect(response.body.myAccount.availabilities).toEqual([])
@@ -329,7 +331,7 @@ describe("User Routes", () => {
 					email: "tech@example.com",
 					picture: "teste.png",
 					passwordHash: hashed,
-					phone: "1234567890",
+					phone: "12345678900",
 					address: "123 Main St",
 					role: "tech",
 				})
@@ -367,7 +369,7 @@ describe("User Routes", () => {
 					email: "tech@example.com",
 					picture: "teste.png",
 					passwordHash: hashed,
-					phone: "1234567890",
+					phone: "12345678900",
 					address: "123 Main St",
 					role: "tech",
 				})
@@ -445,7 +447,7 @@ describe("User Routes", () => {
 					email: email2,
 					picture: "teste.png",
 					passwordHash: hashed,
-					phone: "1234567890",
+					phone: "12345678900",
 					address: "123 Main St",
 					role: "tech",
 				})
@@ -619,7 +621,7 @@ describe("User Routes", () => {
 					name: "Admin Update Test",
 					email: `adminupdate.${Date.now()}@example.com`,
 					passwordHash: hashed,
-					phone: "1234567890",
+					phone: "12345678900",
 					address: "123 Main St",
 					role: "admin",
 				})
@@ -689,7 +691,7 @@ describe("User Routes", () => {
 					name: "Another Admin",
 					email: `anotherAdmin${Date.now()}@example.com`,
 					passwordHash: hashed,
-					phone: "1234567890",
+					phone: "12345678900",
 					address: "123 Main St",
 					role: "admin",
 				})
@@ -883,7 +885,7 @@ describe("User Routes", () => {
 					email: "clientmock2@example.com",
 					picture: "teste.png",
 					passwordHash: hashed,
-					phone: "1234567890",
+					phone: "12345678900",
 					address: "123 Main St",
 					role: "client",
 				})
@@ -942,7 +944,7 @@ describe("User Routes", () => {
 					name: "Client Delete Test",
 					email: `clientdelete.${Date.now()}@example.com`,
 					passwordHash: hashed,
-					phone: "1234567890",
+					phone: "12345678900",
 					address: "123 Main St",
 					role: "client",
 				})
@@ -968,7 +970,7 @@ describe("User Routes", () => {
 					name: "Client Delete Test",
 					email: `clientdelete.${Date.now()}@example.com`,
 					passwordHash: hashed,
-					phone: "1234567890",
+					phone: "12345678900",
 					address: "123 Main St",
 					role: "client",
 				})
@@ -987,7 +989,7 @@ describe("User Routes", () => {
 					name: "Client Delete Test",
 					email: `clientdelete.${Date.now()}@example.com`,
 					passwordHash: hashed,
-					phone: "1234567890",
+					phone: "12345678900",
 					address: "123 Main St",
 					role: "client",
 				})
@@ -1046,7 +1048,7 @@ describe("User Routes", () => {
 					name: "Picture Test User",
 					email: `pictureuser.${Date.now()}@example.com`,
 					passwordHash: hashed,
-					phone: "1234567890",
+					phone: "12345678900",
 					address: "123 Main St",
 					role: "client",
 				})
@@ -1069,7 +1071,7 @@ describe("User Routes", () => {
 					name: "Picture Test User",
 					email: `pictureuser.${Date.now()}@example.com`,
 					passwordHash: hashed,
-					phone: "1234567890",
+					phone: "12345678900",
 					address: "123 Main St",
 					role: "client",
 				})
@@ -1090,7 +1092,7 @@ describe("User Routes", () => {
 					name: "Picture Admin Test User",
 					email: `pictureadmintest.${Date.now()}@example.com`,
 					passwordHash: hashed,
-					phone: "1234567890",
+					phone: "12345678900",
 					address: "123 Main St",
 					role: "client",
 				})

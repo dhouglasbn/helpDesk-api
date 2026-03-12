@@ -263,6 +263,8 @@ export default class UserService {
 				address: result?.address,
 				role: result?.role,
 				picturePath: result && `/users/picture/${result.id}`,
+				createdAt: result?.createdAt,
+				updatedAt: result?.updatedAt,
 			}
 
 			if (user?.role === "tech") {

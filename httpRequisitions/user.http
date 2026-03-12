@@ -1,6 +1,6 @@
 # Variables
 @baseUrl = http://localhost:3333
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU1NGU1ZjJhLTcyMGUtNGU1MS05MGNkLTc4NGNmYTJmMWUwNSIsImVtYWlsIjoidGVzdGUudmlkZW8zQGdtYWlsLmNvbSIsInJvbGUiOiJjbGllbnQiLCJpYXQiOjE3NzMyOTM0ODIsImV4cCI6MTc3MzI5NzA4Mn0.mUp1NJMP7XkjoVA4DKviei1BWUxXGGHjh_cQkCSeono
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImI5ZjBmMTUzLTRiYzItNDU3Ni05YThmLTdiNzg3NjJiMmIzNyIsImVtYWlsIjoidGVjbmljbzFAdGVjaC5jb20iLCJyb2xlIjoidGVjaCIsImlhdCI6MTc3MzMzODIxMSwiZXhwIjoxNzczMzQxODExfQ.uj-YCBXapmDPSM7gqzHVgwQYdqKo30yJAat65UUUnQM
 
 @techId = c6e5ce26-e2f5-4f3b-8f7e-611afdb74ebe
 
@@ -118,15 +118,15 @@ Authorization: Bearer {{token}}
 ###
 # update User Picture
 # @name updateUserPicture
-PUT {{baseUrl}}/users/picture/554e5f2a-720e-4e51-90cd-784cfa2f1e05
+PUT {{baseUrl}}/users/picture/b9f0f153-4bc2-4576-9a8f-7b78762b2b37
 Authorization: Bearer {{token}}
 Content-Type: multipart/form-data; boundary=----BOUNDARY
 
 ------BOUNDARY
-Content-Disposition: form-data; name="profilePic"; filename="perfil.jpeg"
-Content-Type: image/jpeg
+Content-Disposition: form-data; name="profilePic"; filename="lorenzo.png"
+Content-Type: image/png
 
-< ../public/perfil.jpeg
+< ../public/lorenzo.png
 ------BOUNDARY--
 
 ###

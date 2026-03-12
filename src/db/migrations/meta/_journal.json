@@ -50,6 +50,20 @@
       "when": 1770174327694,
       "tag": "0006_sharp_roxanne_simpson",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1773347580597,
+      "tag": "0007_stale_karma",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1773347702567,
+      "tag": "0008_curious_guardsmen",
+      "breakpoints": true
     }
   ]
 }

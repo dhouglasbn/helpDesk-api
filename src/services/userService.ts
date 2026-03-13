@@ -266,7 +266,7 @@ export default class UserService {
 				const availabilities = await db.query.techniciansAvailabilities.findMany({
 					where: eq(schema.techniciansAvailabilities.userId, userId),
 				})
-				return { ...user, availabilities: availabilities.map((a) => a.time) }
+				return { ...user, availabilities: availabilities.map((a) => a.time).sort() }
 			}
 
 			return user

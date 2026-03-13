@@ -98,7 +98,14 @@ export default class TicketService {
 		await db
 			.select({
 				id: schema.tickets.id,
-				clientId: schema.tickets.clientId,
+				client: sql`json_build_object(
+					'id', ${schema.users.id},
+					'name', ${schema.users.name},
+					'email', ${schema.users.email},
+					'phone', ${schema.users.phone},
+					'address', ${schema.users.address},
+					'picturePath', '/users/picture/' || ${schema.users.id}
+				)`,
 				techId: schema.tickets.techId,
 				status: schema.tickets.status,
 				createdAt: schema.tickets.createdAt,
@@ -106,15 +113,17 @@ export default class TicketService {
 				services: sql`json_agg(json_build_object(
         'id', ${schema.services.id},
         'title', ${schema.services.title},
-        'price', ${schema.services.price}::text
+        'price', ${schema.services.price}::text,
+				'active', ${schema.services.active}
       ))`,
 				totalPrice: sql`SUM(${schema.services.price}::numeric)`,
 			})
 			.from(schema.tickets)
+			.leftJoin(schema.users, eq(schema.users.id, schema.tickets.clientId))
 			.leftJoin(schema.ticketServices, eq(schema.ticketServices.ticketId, schema.tickets.id))
 			.leftJoin(schema.services, eq(schema.services.id, schema.ticketServices.serviceId))
 			.where(eq(schema.tickets.techId, techId))
-			.groupBy(schema.tickets.id)
+			.groupBy(schema.tickets.id, schema.users.id)
 			.orderBy(schema.tickets.createdAt)
 
 	listAllTickets = async () =>

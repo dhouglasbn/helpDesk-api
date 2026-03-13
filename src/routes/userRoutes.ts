@@ -34,7 +34,6 @@ router.put(
 		z.object({
 			newName: z.string().min(3),
 			newEmail: z.email(),
-			newPassword: z.string().min(6),
 			newPhone: z.string().min(10),
 			newAddress: z.string().min(5),
 		}),
@@ -71,7 +70,6 @@ router.put(
 		z.object({
 			newName: z.string().min(3),
 			newEmail: z.email(),
-			newPassword: z.string().min(6),
 			newPhone: z.string().min(10),
 			newAddress: z.string().min(5),
 		}),
@@ -104,7 +102,6 @@ router.put(
 		z.object({
 			newName: z.string().min(3),
 			newEmail: z.email(),
-			newPassword: z.string().min(6),
 			newPhone: z.string().min(10),
 			newAddress: z.string().min(5),
 		}),
@@ -128,7 +125,21 @@ router.delete(
 	userController.deleteClientAccount,
 )
 
-// GET e UPLOAD da foto de usuário
+// GET e UPLOAD de dados específicos
+router.patch(
+	"/password/:id",
+	validateZodSchema(
+		z.object({
+			currentPassword: z.string().min(6),
+			newPassword: z.string().min(6),
+		}),
+		z.object({
+			id: z.uuid(),
+		}),
+	),
+	authMiddleware,
+	userController.updateUserPassword,
+)
 router.put(
 	"/picture/:id",
 	upload.single("profilePic"),

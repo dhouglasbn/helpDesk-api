@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>23/23</span>
+                <span class='fraction'>24/24</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>23/23</span>
+                <span class='fraction'>24/24</span>
             </div>
         
             
@@ -218,7 +218,18 @@
 <a name='L153'></a><a href='#L153'>153</a>
 <a name='L154'></a><a href='#L154'>154</a>
 <a name='L155'></a><a href='#L155'>155</a>
-<a name='L156'></a><a href='#L156'>156</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L156'></a><a href='#L156'>156</a>
+<a name='L157'></a><a href='#L157'>157</a>
+<a name='L158'></a><a href='#L158'>158</a>
+<a name='L159'></a><a href='#L159'>159</a>
+<a name='L160'></a><a href='#L160'>160</a>
+<a name='L161'></a><a href='#L161'>161</a>
+<a name='L162'></a><a href='#L162'>162</a>
+<a name='L163'></a><a href='#L163'>163</a>
+<a name='L164'></a><a href='#L164'>164</a>
+<a name='L165'></a><a href='#L165'>165</a>
+<a name='L166'></a><a href='#L166'>166</a>
+<a name='L167'></a><a href='#L167'>167</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -264,7 +275,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -286,7 +296,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -334,9 +343,22 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -395,7 +417,7 @@ router.post(
 			name: z.string().min(3),
 			email: z.email(),
 			password: z.string().min(6),
-			phone: z.string().min(10),
+			phone: z.string().length(11),
 			address: z.string().min(5),
 		}),
 	),
@@ -409,7 +431,6 @@ router.put(
 		z.object({
 			newName: z.string().min(3),
 			newEmail: z.email(),
-			newPassword: z.string().min(6),
 			newPhone: z.string().min(10),
 			newAddress: z.string().min(5),
 		}),
@@ -446,7 +467,6 @@ router.put(
 		z.object({
 			newName: z.string().min(3),
 			newEmail: z.email(),
-			newPassword: z.string().min(6),
 			newPhone: z.string().min(10),
 			newAddress: z.string().min(5),
 		}),
@@ -466,7 +486,7 @@ router.post(
 			name: z.string().min(3),
 			email: z.email(),
 			password: z.string().min(6),
-			phone: z.string().min(10),
+			phone: z.string().length(11),
 			address: z.string().min(5),
 		}),
 	),
@@ -479,7 +499,6 @@ router.put(
 		z.object({
 			newName: z.string().min(3),
 			newEmail: z.email(),
-			newPassword: z.string().min(6),
 			newPhone: z.string().min(10),
 			newAddress: z.string().min(5),
 		}),
@@ -503,7 +522,21 @@ router.delete(
 	userController.deleteClientAccount,
 )
 &nbsp;
-// GET e UPLOAD da foto de usuário
+// GET e UPLOAD de dados específicos
+router.patch(
+	"/password/:id",
+	validateZodSchema(
+		z.object({
+			currentPassword: z.string().min(6),
+			newPassword: z.string().min(6),
+		}),
+		z.object({
+			id: z.uuid(),
+		}),
+	),
+	authMiddleware,
+	userController.updateUserPassword,
+)
 router.put(
 	"/picture/:id",
 	upload.single("profilePic"),
@@ -535,7 +568,7 @@ export { router as userRoutes }
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-02-27T18:56:41.247Z
+                at 2026-03-13T01:12:18.498Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

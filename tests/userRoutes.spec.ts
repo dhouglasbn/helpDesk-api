@@ -909,6 +909,320 @@ describe("User Routes", () => {
 		})
 	})
 
+	describe("PATCH /users/password/:id - Update User Password", () => {
+		it("should return 401 when no token is provided", async () => {
+			const response = await request(app).patch(`/users/password/${mockClientId}`).send({
+				currentPassword: "password123",
+				newPassword: "newpassword123",
+			})
+			expect(response.status).toBe(401)
+		})
+
+		it("should prevent client from updating another client account", async () => {
+			const hashed = bcrypt.hashSync("password123", 8)
+			const [otherClient] = await db
+				.insert(users)
+				.values({
+					name: "Client Update Password Test",
+					email: `client.update.password.${Date.now()}@example.com`,
+					passwordHash: hashed,
+					phone: "12345678900",
+					address: "123 Main St",
+					role: "client",
+				})
+				.returning()
+			const response = await request(app)
+				.patch(`/users/password/${otherClient.id}`)
+				.set("Authorization", `Bearer ${mockClientToken}`)
+				.send({
+					currentPassword: "password123",
+					newPassword: "newpassword123",
+				})
+			expect(response.status).toBe(403)
+		})
+
+		it("should prevent client from updating another tech user account", async () => {
+			const hashed = bcrypt.hashSync("password123", 8)
+			const [otherTech] = await db
+				.insert(users)
+				.values({
+					name: "Tech Update Password Test",
+					email: `tech.update.password.${Date.now()}@example.com`,
+					passwordHash: hashed,
+					phone: "12345678900",
+					address: "123 Main St",
+					role: "tech",
+				})
+				.returning()
+
+			const response = await request(app)
+				.patch(`/users/password/${otherTech.id}`)
+				.set("Authorization", `Bearer ${mockClientToken}`)
+				.send({
+					currentPassword: "password123",
+					newPassword: "newpassword123",
+				})
+			expect(response.status).toBe(403)
+		})
+
+		it("should prevent client from updating another admin user account", async () => {
+			const hashed = bcrypt.hashSync("password123", 8)
+			const [otherAdmin] = await db
+				.insert(users)
+				.values({
+					name: "Admin Update Password Test",
+					email: `admin.update.password.${Date.now()}@example.com`,
+					passwordHash: hashed,
+					phone: "12345678900",
+					address: "123 Main St",
+					role: "admin",
+				})
+				.returning()
+
+			const response = await request(app)
+				.patch(`/users/password/${otherAdmin.id}`)
+				.set("Authorization", `Bearer ${mockClientToken}`)
+				.send({
+					currentPassword: "password123",
+					newPassword: "newpassword123",
+				})
+			expect(response.status).toBe(403)
+		})
+
+		it("should prevent tech from updating another client account", async () => {
+			const hashed = bcrypt.hashSync("password123", 8)
+			const [otherClient] = await db
+				.insert(users)
+				.values({
+					name: "Client Update Password Test",
+					email: `client.update.password.${Date.now()}@example.com`,
+					passwordHash: hashed,
+					phone: "12345678900",
+					address: "123 Main St",
+					role: "client",
+				})
+				.returning()
+
+			const response = await request(app)
+				.patch(`/users/password/${otherClient.id}`)
+				.set("Authorization", `Bearer ${mockTechToken}`)
+				.send({
+					currentPassword: "password123",
+					newPassword: "newpassword123",
+				})
+			expect(response.status).toBe(403)
+		})
+
+		it("should prevent tech from updating another tech user account", async () => {
+			const hashed = bcrypt.hashSync("password123", 8)
+			const [otherTech] = await db
+				.insert(users)
+				.values({
+					name: "Tech Update Password Test",
+					email: `tech.update.password.${Date.now()}@example.com`,
+					passwordHash: hashed,
+					phone: "12345678900",
+					address: "123 Main St",
+					role: "tech",
+				})
+				.returning()
+
+			const response = await request(app)
+				.patch(`/users/password/${otherTech.id}`)
+				.set("Authorization", `Bearer ${mockTechToken}`)
+				.send({
+					currentPassword: "password123",
+					newPassword: "newpassword123",
+				})
+			expect(response.status).toBe(403)
+		})
+
+		it("should prevent tech from updating another admin user account", async () => {
+			const hashed = bcrypt.hashSync("password123", 8)
+			const [otherAdmin] = await db
+				.insert(users)
+				.values({
+					name: "Admin Update Password Test",
+					email: `admin.update.password.${Date.now()}@example.com`,
+					passwordHash: hashed,
+					phone: "12345678900",
+					address: "123 Main St",
+					role: "admin",
+				})
+				.returning()
+
+			const response = await request(app)
+				.patch(`/users/password/${otherAdmin.id}`)
+				.set("Authorization", `Bearer ${mockTechToken}`)
+				.send({
+					currentPassword: "password123",
+					newPassword: "newpassword123",
+				})
+			expect(response.status).toBe(403)
+		})
+
+		it("should allow client to update their own account", async () => {
+			const response = await request(app)
+				.patch(`/users/password/${mockClientId}`)
+				.set("Authorization", `Bearer ${mockClientToken}`)
+				.send({
+					currentPassword: "password123",
+					newPassword: "newpassword123",
+				})
+			expect(response.status).toBe(200)
+			expect(response.body).toHaveProperty("message", "Password updated.")
+		})
+
+		it("should allow tech to update their own account", async () => {
+			const response = await request(app)
+				.patch(`/users/password/${mockTechId}`)
+				.set("Authorization", `Bearer ${mockTechToken}`)
+				.send({
+					currentPassword: "password123",
+					newPassword: "newpassword123",
+				})
+			expect(response.status).toBe(200)
+			expect(response.body).toHaveProperty("message", "Password updated.")
+		})
+
+		it("should allow admin to update their own account", async () => {
+			const response = await request(app)
+				.patch(`/users/password/${adminId}`)
+				.set("Authorization", `Bearer ${adminToken}`)
+				.send({
+					currentPassword: "password123",
+					newPassword: "newpassword123",
+				})
+			expect(response.status).toBe(200)
+			expect(response.body).toHaveProperty("message", "Password updated.")
+		})
+
+		it("admin should be able to update any client account", async () => {
+			const hashed = bcrypt.hashSync("password123", 8)
+			const [otherClient] = await db
+				.insert(users)
+				.values({
+					name: "Client Update Password Test",
+					email: `client.update.password.${Date.now()}@example.com`,
+					passwordHash: hashed,
+					phone: "12345678900",
+					address: "123 Main St",
+					role: "client",
+				})
+				.returning()
+
+			const response = await request(app)
+				.patch(`/users/password/${otherClient.id}`)
+				.set("Authorization", `Bearer ${adminToken}`)
+				.send({
+					currentPassword: "password123",
+					newPassword: "newpassword123",
+				})
+			expect(response.status).toBe(200)
+			expect(response.body).toHaveProperty("message", "Password updated.")
+		})
+
+		it("admin should be able to update any tech account", async () => {
+			const hashed = bcrypt.hashSync("password123", 8)
+			const [otherTech] = await db
+				.insert(users)
+				.values({
+					name: "Tech Update Password Test",
+					email: `tech.update.password.${Date.now()}@example.com`,
+					passwordHash: hashed,
+					phone: "12345678900",
+					address: "123 Main St",
+					role: "tech",
+				})
+				.returning()
+
+			const response = await request(app)
+				.patch(`/users/password/${otherTech.id}`)
+				.set("Authorization", `Bearer ${adminToken}`)
+				.send({
+					currentPassword: "password123",
+					newPassword: "newpassword123",
+				})
+			expect(response.status).toBe(200)
+			expect(response.body).toHaveProperty("message", "Password updated.")
+		})
+
+		it("admin should be able to update any admin account", async () => {
+			const hashed = bcrypt.hashSync("password123", 8)
+			const [otherAdmin] = await db
+				.insert(users)
+				.values({
+					name: "Admin Update Password Test",
+					email: `admin.update.password.${Date.now()}@example.com`,
+					passwordHash: hashed,
+					phone: "12345678900",
+					address: "123 Main St",
+					role: "admin",
+				})
+				.returning()
+
+			const response = await request(app)
+				.patch(`/users/password/${otherAdmin.id}`)
+				.set("Authorization", `Bearer ${adminToken}`)
+				.send({
+					currentPassword: "password123",
+					newPassword: "newpassword123",
+				})
+			expect(response.status).toBe(200)
+			expect(response.body).toHaveProperty("message", "Password updated.")
+		})
+
+		it("should validate update fields", async () => {
+			const response = await request(app)
+				.patch(`/users/password/${mockClientId}`)
+				.set("Authorization", `Bearer ${mockClientToken}`)
+				.send({
+					currentPassword: "pa",
+					newPassword: "",
+				})
+			expect(response.status).toBe(400)
+		})
+
+		it("should return 400 when user ID doesn't exist", async () => {
+			const validUUID = "00000000-0000-0000-0000-000000000000"
+			const clientToken = createMockToken(validUUID, "client")
+
+			const response = await request(app)
+				.patch(`/users/password/${validUUID}`)
+				.set("Authorization", `Bearer ${clientToken}`)
+				.send({
+					currentPassword: "password123",
+					newPassword: "newpassword123",
+				})
+			expect(response.status).toBe(400)
+		})
+
+		it("should return 400 when currentPassword doesn't match user's password", async () => {
+			const hashed = bcrypt.hashSync("password123", 8)
+			const [client] = await db
+				.insert(users)
+				.values({
+					name: "Client Update Password Test",
+					email: `client.update.password.${Date.now()}@example.com`,
+					passwordHash: hashed,
+					phone: "12345678900",
+					address: "123 Main St",
+					role: "client",
+				})
+				.returning()
+			const clientToken = createMockToken(client.id, "client")
+
+			const response = await request(app)
+				.patch(`/users/password/${client.id}`)
+				.set("Authorization", `Bearer ${clientToken}`)
+				.send({
+					currentPassword: "wrongpassword123",
+					newPassword: "newpassword123",
+				})
+			expect(response.status).toBe(400)
+		})
+	})
+
 	describe("GET /users/clientList - List Client Accounts", () => {
 		it("should return 403 when non-admin tries to list clients", async () => {
 			const response = await request(app).get("/users/clientList").set("Authorization", `Bearer ${mockClientToken}`)

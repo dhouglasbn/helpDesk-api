@@ -148,12 +148,11 @@ export default class UserController {
 		}
 		try {
 			const updatingUserId = request.params.id
-			const { newName, newEmail, newPassword, newPhone, newAddress } = request.body
+			const { newName, newEmail, newPhone, newAddress } = request.body
 			const result = await this.userService.updateTechAccount({
 				updatingUserId,
 				newName,
 				newEmail,
-				newPassword,
 				newPhone,
 				newAddress,
 			})
@@ -173,12 +172,11 @@ export default class UserController {
 		}
 		try {
 			const updatingUserId = request.params.id
-			const { newName, newEmail, newPassword, newPhone, newAddress } = request.body
+			const { newName, newEmail, newPhone, newAddress } = request.body
 			const newAdmin = await this.userService.updateAdminAccount({
 				updatingUserId,
 				newName,
 				newEmail,
-				newPassword,
 				newPhone,
 				newAddress,
 			})
@@ -202,16 +200,33 @@ export default class UserController {
 		}
 		try {
 			const updatingUserId = request.params.id
-			const { newName, newEmail, newPassword, newPhone, newAddress } = request.body
+			const { newName, newEmail, newPhone, newAddress } = request.body
 			const newClient = await this.userService.updateClientAccount({
 				updatingUserId,
 				newName,
 				newEmail,
-				newPassword,
 				newPhone,
 				newAddress,
 			})
 			return reply.status(200).json({ newClient })
+		} catch (error) {
+			return reply.status(400).json({ error: (error as Error).message })
+		}
+	}
+
+	updateUserPassword = async (request: OurRequest, reply: Response) => {
+		const isUserAuthorized = request.user && (request.user.role === "admin" || request.user.id === request.params.id)
+		if (!isUserAuthorized) {
+			return reply.status(403).json({
+				message: "Acesso negado: Somente Admins podem atualizar a senha de outros usuários",
+			})
+		}
+
+		try {
+			const updatingUserId = request.params.id
+			const { currentPassword, newPassword } = request.body
+			const result = await this.userService.updateUserPassword(updatingUserId, currentPassword, newPassword)
+			return reply.status(200).json({ message: result })
 		} catch (error) {
 			return reply.status(400).json({ error: (error as Error).message })
 		}

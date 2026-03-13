@@ -122,7 +122,6 @@
  *             required:
  *               - newName
  *               - newEmail
- *               - newPassword
  *               - newPhone
  *               - newAddress
  *             properties:
@@ -133,9 +132,6 @@
  *                 type: string
  *                 format: email
  *                 example: tecnico3@tech.com
- *               newPassword:
- *                 type: string
- *                 example: hashed-password
  *               newPhone:
  *                 type: string
  *                 example: "22999999999"
@@ -211,7 +207,6 @@
  *             required:
  *               - newName
  *               - newEmail
- *               - newPassword
  *               - newPhone
  *               - newAddress
  *             properties:
@@ -222,9 +217,6 @@
  *                 type: string
  *                 format: email
  *                 example: administrador@admin.com
- *               newPassword:
- *                 type: string
- *                 example: hashed-password
  *               newPhone:
  *                 type: string
  *                 example: "22999999999"
@@ -302,7 +294,6 @@
  *             required:
  *               - newName
  *               - newEmail
- *               - newPassword
  *               - newPhone
  *               - newAddress
  *             properties:
@@ -313,9 +304,6 @@
  *                 type: string
  *                 format: email
  *                 example: cliente@postman.com
- *               newPassword:
- *                 type: string
- *                 example: hashed-password
  *               newPhone:
  *                 type: string
  *                 example: "22999999999"
@@ -346,6 +334,43 @@
  *     responses:
  *       204:
  *         description: Conta removida
+ */
+
+/**
+ * @openapi
+ * /users/password/{id}:
+ *   patch:
+ *     tags:
+ *       - Users
+ *     summary: Atualiza a senha de um usuário
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         schema:
+ *           type: string
+ *           format: uuid
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - currentPassword
+ *               - newPassword
+ *             properties:
+ *               currentPassword:
+ *                 type: string
+ *                 example: hashed-password
+ *               newPassword:
+ *                 type: string
+ *                 example: new-hashed-password
+ *     responses:
+ *       200:
+ *         message: Senha atualizada
  */
 
 /**

@@ -87,14 +87,7 @@ export default class UserService {
 			where: eq(schema.users.role, "client"),
 		})
 
-	updateAdminAccount = async ({
-		updatingUserId,
-		newName,
-		newEmail,
-		newPassword,
-		newPhone,
-		newAddress,
-	}: UpdateUserObject) => {
+	updateAdminAccount = async ({ updatingUserId, newName, newEmail, newPhone, newAddress }: UpdateUserObject) => {
 		const userWithNewEmail = await db.query.users.findFirst({
 			where: eq(schema.users.email, newEmail),
 		})
@@ -110,14 +103,11 @@ export default class UserService {
 			throw new Error("Email already in use by another account")
 		}
 
-		const passwordHash = await bcrypt.hash(newPassword, 10)
-
 		return await db
 			.update(schema.users)
 			.set({
 				name: newName,
 				email: newEmail,
-				passwordHash,
 				phone: newPhone,
 				address: newAddress,
 			})
@@ -125,14 +115,7 @@ export default class UserService {
 			.returning()
 	}
 
-	updateTechAccount = async ({
-		updatingUserId,
-		newName,
-		newEmail,
-		newPassword,
-		newPhone,
-		newAddress,
-	}: UpdateUserObject) => {
+	updateTechAccount = async ({ updatingUserId, newName, newEmail, newPhone, newAddress }: UpdateUserObject) => {
 		const userWithNewEmail = await db.query.users.findFirst({
 			where: eq(schema.users.email, newEmail),
 		})
@@ -148,14 +131,11 @@ export default class UserService {
 			throw new Error("Email already in use by another account")
 		}
 
-		const passwordHash = await bcrypt.hash(newPassword, 10)
-
 		return await db
 			.update(schema.users)
 			.set({
 				name: newName,
 				email: newEmail,
-				passwordHash,
 				phone: newPhone,
 				address: newAddress,
 			})
@@ -163,14 +143,7 @@ export default class UserService {
 			.returning()
 	}
 
-	updateClientAccount = async ({
-		updatingUserId,
-		newName,
-		newEmail,
-		newPassword,
-		newPhone,
-		newAddress,
-	}: UpdateUserObject) => {
+	updateClientAccount = async ({ updatingUserId, newName, newEmail, newPhone, newAddress }: UpdateUserObject) => {
 		const userWithNewEmail = await db.query.users.findFirst({
 			where: eq(schema.users.email, newEmail),
 		})
@@ -186,14 +159,11 @@ export default class UserService {
 			throw new Error("Email already in use by another account")
 		}
 
-		const passwordHash = await bcrypt.hash(newPassword, 10)
-
 		return await db
 			.update(schema.users)
 			.set({
 				name: newName,
 				email: newEmail,
-				passwordHash,
 				phone: newPhone,
 				address: newAddress,
 			})
@@ -235,6 +205,31 @@ export default class UserService {
 			.where(eq(schema.users.id, userId))
 
 		return `http://localhost:3333/users/picture/${userId}`
+	}
+
+	updateUserPassword = async (userId: string, currentPassword: string, newPassword: string) => {
+		const user = await db.query.users.findFirst({
+			where: eq(schema.users.id, userId),
+		})
+		if (!user) {
+			throw new Error("User not found")
+		}
+
+		const passwordMatch = await bcrypt.compare(currentPassword, user.passwordHash)
+		if (!passwordMatch) {
+			throw new Error("Current password is incorrect")
+		}
+
+		const newPasswordHash = await bcrypt.hash(newPassword, 10)
+
+		await db
+			.update(schema.users)
+			.set({
+				passwordHash: newPasswordHash,
+			})
+			.where(eq(schema.users.id, userId))
+
+		return "Password updated."
 	}
 
 	getUserPicture = async (userId: string) => {

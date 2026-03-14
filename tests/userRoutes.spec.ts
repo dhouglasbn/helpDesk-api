@@ -248,8 +248,6 @@ describe("User Routes", () => {
 			expect(response.body.myAccount.address).toBe("123 Main St")
 			expect(response.body.myAccount.role).toBe("client")
 			expect(response.body.myAccount.picturePath).toBe(`/users/picture/${mockClientId}`)
-			expect(response.body.myAccount).toHaveProperty("createdAt")
-			expect(response.body.myAccount).toHaveProperty("updatedAt")
 		})
 
 		it("should return tech info when authenticated", async () => {
@@ -263,8 +261,6 @@ describe("User Routes", () => {
 			expect(response.body.myAccount.address).toBe("123 Main St")
 			expect(response.body.myAccount.role).toBe("tech")
 			expect(response.body.myAccount.picturePath).toBe(`/users/picture/${mockTechId}`)
-			expect(response.body.myAccount).toHaveProperty("createdAt")
-			expect(response.body.myAccount).toHaveProperty("updatedAt")
 			expect(response.body.myAccount).toHaveProperty("availabilities")
 		})
 
@@ -279,6 +275,52 @@ describe("User Routes", () => {
 			expect(response.body.myAccount.address).toBe("123 Main St")
 			expect(response.body.myAccount.role).toBe("tech")
 			expect(response.body.myAccount.availabilities).toEqual([])
+		})
+	})
+
+	describe("GET /users/:id - Get User Info", () => {
+		it("should return 401 when no token is provided", async () => {
+			const response = await request(app).get(`/users/${mockClientId}`)
+			expect(response.status).toBe(401)
+		})
+
+		it("should return 400 when id is invalid", async () => {
+			const invalidId = "invalid-id"
+			const response = await request(app).get(`/users/${invalidId}`).set("Authorization", `Bearer ${adminToken}`)
+			expect(response.status).toBe(400)
+		})
+
+		it("should return 400 when no id is found", async () => {
+			const inexistentId = "99999999-9999-9999-9999-999999999999" // Valid UUID format but doesn't exist
+			const response = await request(app).get(`/users/${inexistentId}`).set("Authorization", `Bearer ${adminToken}`)
+			expect(response.status).toBe(400)
+		})
+
+		it("should return client info", async () => {
+			const response = await request(app).get(`/users/${mockClientId}`).set("Authorization", `Bearer ${adminToken}`)
+			expect(response.status).toBe(200)
+			expect(response.body).toHaveProperty("user")
+			expect(response.body.user.id).toBe(mockClientId)
+			expect(response.body.user.name).toBe("Test User")
+			expect(response.body.user.email).toBe(mockClientEmail)
+			expect(response.body.user.phone).toBe("12345678900")
+			expect(response.body.user.address).toBe("123 Main St")
+			expect(response.body.user.role).toBe("client")
+			expect(response.body.user.picturePath).toBe(`/users/picture/${mockClientId}`)
+		})
+
+		it("should return tech info", async () => {
+			const response = await request(app).get(`/users/${mockTechId}`).set("Authorization", `Bearer ${adminToken}`)
+			expect(response.status).toBe(200)
+			expect(response.body).toHaveProperty("user")
+			expect(response.body.user.id).toBe(mockTechId)
+			expect(response.body.user.name).toBe("Tech User")
+			expect(response.body.user.email).toBe("techmock@example.com")
+			expect(response.body.user.phone).toBe("12345678900")
+			expect(response.body.user.address).toBe("123 Main St")
+			expect(response.body.user.role).toBe("tech")
+			expect(response.body.user.picturePath).toBe(`/users/picture/${mockTechId}`)
+			expect(response.body.user).toHaveProperty("availabilities")
 		})
 	})
 

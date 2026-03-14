@@ -170,6 +170,7 @@ router.get(
 			id: z.uuid(),
 		}),
 	),
+	authMiddleware,
 	userController.getUserById,
 )
 

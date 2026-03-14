@@ -127,8 +127,17 @@ export default class UserController {
 			if (!request.user?.id) {
 				return reply.status(400).json({ message: "ID do usuário não encontrado no token." })
 			}
-			const myAccount = await this.userService.getMyAccount(request.user.id)
+			const myAccount = await this.userService.getUserById(request.user.id)
 			return reply.status(200).json({ myAccount })
+		} catch (error) {
+			return reply.status(400).json({ error: (error as Error).message })
+		}
+	}
+
+	getUserById = async (request: OurRequest, reply: Response) => {
+		try {
+			const user = await this.userService.getUserById(request.params.id)
+			return reply.status(200).json({ user })
 		} catch (error) {
 			return reply.status(400).json({ error: (error as Error).message })
 		}

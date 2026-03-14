@@ -83,9 +83,19 @@ export default class UserService {
 			.groupBy(schema.users.id)
 
 	listClientAccounts = async () =>
-		await db.query.users.findMany({
-			where: eq(schema.users.role, "client"),
-		})
+		await db
+			.select({
+				id: schema.users.id,
+				name: schema.users.name,
+				email: schema.users.email,
+				phone: schema.users.phone,
+				address: schema.users.address,
+				role: schema.users.role,
+				picturePath: sql`'/users/picture/' || ${schema.users.id}`,
+			})
+			.from(schema.users)
+			.where(eq(schema.users.role, "client"))
+			.groupBy(schema.users.id)
 
 	updateAdminAccount = async ({ updatingUserId, newName, newEmail, newPhone, newAddress }: UpdateUserObject) => {
 		const userWithNewEmail = await db.query.users.findFirst({
@@ -244,7 +254,7 @@ export default class UserService {
 		return user.picture
 	}
 
-	getMyAccount = async (userId: string) => {
+	getUserById = async (userId: string) => {
 		try {
 			const result = await db.query.users.findFirst({
 				where: eq(schema.users.id, userId),
@@ -258,8 +268,6 @@ export default class UserService {
 				address: result?.address,
 				role: result?.role,
 				picturePath: result && `/users/picture/${result.id}`,
-				createdAt: result?.createdAt,
-				updatedAt: result?.updatedAt,
 			}
 
 			if (user?.role === "tech") {

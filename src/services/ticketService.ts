@@ -4,6 +4,7 @@ import { schema } from "../db/schema/index.ts"
 import { eq, and, inArray, sql, desc } from "drizzle-orm"
 import type { UserInToken } from "../types/ourRequest.ts"
 import type { TicketStatus } from "../types/ticketData.ts"
+import { alias } from "drizzle-orm/pg-core"
 
 export default class TicketService {
 	createTicket = async (clientId: string, techId: string, servicesIds: string[]) => {
@@ -128,27 +129,41 @@ export default class TicketService {
 			.groupBy(schema.tickets.id, schema.users.id)
 			.orderBy(schema.tickets.createdAt)
 
-	listAllTickets = async () =>
-		await db
+	listAllTickets = async () => {
+		const client = alias(schema.users, "client")
+		const tech = alias(schema.users, "tech")
+		return await db
 			.select({
 				id: schema.tickets.id,
-				clientId: schema.tickets.clientId,
-				techId: schema.tickets.techId,
+				client: sql`json_build_object(
+					'id', ${client.id},
+					'name', ${client.name},
+					'picturePath', '/users/picture/' || ${client.id}
+				)`,
+				tech: sql`json_build_object(
+					'id', ${tech.id},
+					'name', ${tech.name},
+					'picturePath', '/users/picture/' || ${tech.id}
+				)`,
 				status: schema.tickets.status,
 				createdAt: schema.tickets.createdAt,
 				updatedAt: schema.tickets.updatedAt,
 				services: sql`json_agg(json_build_object(
         'id', ${schema.services.id},
         'title', ${schema.services.title},
-        'price', ${schema.services.price}::text
+        'price', ${schema.services.price}::text,
+        'active', ${schema.services.active}
       ))`,
 				totalPrice: sql`SUM(${schema.services.price}::numeric)`,
 			})
 			.from(schema.tickets)
+			.leftJoin(client, eq(client.id, schema.tickets.clientId))
+			.leftJoin(tech, eq(tech.id, schema.tickets.techId))
 			.leftJoin(schema.ticketServices, eq(schema.ticketServices.ticketId, schema.tickets.id))
 			.leftJoin(schema.services, eq(schema.services.id, schema.ticketServices.serviceId))
-			.groupBy(schema.tickets.id)
+			.groupBy(schema.tickets.id, client.id, tech.id)
 			.orderBy(schema.tickets.createdAt)
+	}
 
 	addServicesToTicket = async (ticketId: string, user: UserInToken, servicesIds: string[]) => {
 		const ticket = await db.query.tickets.findFirst({

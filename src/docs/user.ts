@@ -98,6 +98,20 @@
 
 /**
  * @openapi
+ * /users/clientList:
+ *   get:
+ *     tags:
+ *       - Users
+ *     summary: Lista contas de clientes
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Lista de clientes
+ */
+
+/**
+ * @openapi
  * /users/tech/{id}:
  *   put:
  *     tags:
@@ -423,4 +437,39 @@
  *     responses:
  *       200:
  *         description: Foto retornada
+ */
+
+/**
+ * @openapi
+ * /users/me:
+ *   get:
+ *     tags:
+ *       - Users
+ *     summary: Retorna os dados do usuário autenticado
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Dados do usuário retornados
+ */
+
+/**
+ * @openapi
+ * /users/{id}:
+ *   get:
+ *     tags:
+ *       - Users
+ *     summary: Retorna os dados do usuário
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         schema:
+ *           type: string
+ *           format: uuid
+ *     responses:
+ *       200:
+ *         description: Dados do usuário retornados
  */

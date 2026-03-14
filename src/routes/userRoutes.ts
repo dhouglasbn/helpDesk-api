@@ -162,5 +162,15 @@ router.get(
 	),
 	userController.getUserPicture,
 )
+router.get(
+	"/:id",
+	validateZodSchema(
+		undefined,
+		z.object({
+			id: z.uuid(),
+		}),
+	),
+	userController.getUserById,
+)
 
 export { router as userRoutes }

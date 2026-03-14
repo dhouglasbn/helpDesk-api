@@ -73,6 +73,7 @@ export default class TicketService {
 					'email', ${schema.users.email},
 					'phone', ${schema.users.phone},
 					'address', ${schema.users.address},
+					'role', ${schema.users.role},
 					'picturePath', '/users/picture/' || ${schema.users.id}
 				)`,
 				status: schema.tickets.status,
@@ -104,6 +105,7 @@ export default class TicketService {
 					'email', ${schema.users.email},
 					'phone', ${schema.users.phone},
 					'address', ${schema.users.address},
+					'role', ${schema.users.role},
 					'picturePath', '/users/picture/' || ${schema.users.id}
 				)`,
 				techId: schema.tickets.techId,

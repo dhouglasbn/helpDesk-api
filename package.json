@@ -13,7 +13,10 @@
     "db:seed": "node --env-file .env --experimental-strip-types --no-warnings src/db/seed.ts",
     "build": "tsc",
     "bootstrap": "npm run db:migrate && npm run db:seed",
-    "start": "dist/src/server.js"
+    "start": "dist/server.js"
+  },
+  "engines": {
+    "node": "24.x"
   },
   "keywords": [],
   "author": "",

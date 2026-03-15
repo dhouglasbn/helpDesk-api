@@ -16,5 +16,7 @@
     "skipLibCheck": true,
     "moduleResolution": "node16",
     "strictNullChecks": true,
+    "outDir": "dist",
+    "rootDir": "src"
   }
 }
